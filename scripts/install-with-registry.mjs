@@ -3,11 +3,8 @@
  * Loads .env into process.env and runs npm install.
  * For local development only — not supported inside StackBlitz WebContainers.
  */
-import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
-import { resolve } from 'node:path';
-
-const envPath = resolve(process.cwd(), '.env');
+import { loadEnv } from './load-env.mjs';
 
 function isStackBlitz() {
   return (
@@ -33,46 +30,26 @@ What to do instead:
      npm run install:with-registry
      npm start
 
-  2. StackBlitz Teams / Enterprise
+  2. StackBlitz with vendored deps
+     Open branch stackblitz/vendor (see README → "StackBlitz vendor").
+
+  3. StackBlitz Teams / Enterprise
      Configure private npm registries in workspace settings:
      https://developer.stackblitz.com/teams/private-npm-registry-integration
      Do NOT run install:with-registry — deps install when the project opens.
 
-  3. Share a deployed build (Netlify, etc.) instead of a StackBlitz link.
+  4. Share a deployed build (Netlify, etc.) instead of a StackBlitz link.
 
 See README.md → "StackBlitz" for details.
 `);
   process.exit(1);
 }
 
-let envFile;
 try {
-  envFile = readFileSync(envPath, 'utf8');
-} catch {
-  console.error('Missing .env — copy example.env and fill in your registry tokens.');
+  loadEnv();
+} catch (error) {
+  console.error(error.message);
   process.exit(1);
-}
-
-for (const line of envFile.split('\n')) {
-  const trimmed = line.trim();
-  if (!trimmed || trimmed.startsWith('#')) {
-    continue;
-  }
-  const separator = trimmed.indexOf('=');
-  if (separator === -1) {
-    continue;
-  }
-  const key = trimmed.slice(0, separator).trim();
-  let value = trimmed.slice(separator + 1).trim();
-  if (
-    (value.startsWith('"') && value.endsWith('"')) ||
-    (value.startsWith("'") && value.endsWith("'"))
-  ) {
-    value = value.slice(1, -1);
-  }
-  if (key) {
-    process.env[key] = value;
-  }
 }
 
 const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';

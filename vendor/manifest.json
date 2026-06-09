@@ -1,0 +1,56 @@
+{
+  "generatedAt": "2026-06-09T16:15:25.834Z",
+  "mode": "stackblitz",
+  "packages": [
+    {
+      "name": "@atomchat-io/ui-design-system",
+      "version": "0.5.1",
+      "range": "^0.5.1",
+      "tarball": "atomchat-io-ui-design-system-0.5.1.tgz"
+    },
+    {
+      "name": "@atomchat-io/ui-tokens",
+      "version": "0.2.5",
+      "range": "^0.2.5",
+      "tarball": "atomchat-io-ui-tokens-0.2.5.tgz"
+    },
+    {
+      "name": "@atomchat-io/ui-utils",
+      "version": "0.2.0",
+      "range": "^0.2.0",
+      "tarball": "atomchat-io-ui-utils-0.2.0.tgz"
+    },
+    {
+      "name": "@fortawesome/pro-regular-svg-icons",
+      "version": "7.1.0",
+      "range": "7.1.0",
+      "tarball": "fortawesome-pro-regular-svg-icons-7.1.0.tgz"
+    },
+    {
+      "name": "@fortawesome/pro-solid-svg-icons",
+      "version": "7.1.0",
+      "range": "7.1.0",
+      "tarball": "fortawesome-pro-solid-svg-icons-7.1.0.tgz"
+    }
+  ],
+  "savedDependencies": {
+    "@angular/common": "20.3.16",
+    "@angular/core": "20.3.16",
+    "@angular/forms": "20.3.16",
+    "@angular/material": "20.2.14",
+    "@angular/cdk": "20.2.14",
+    "@angular/platform-browser": "20.3.16",
+    "@angular/router": "20.3.16",
+    "@atomchat-io/ui-design-system": "^0.5.1",
+    "@atomchat-io/ui-tokens": "^0.2.5",
+    "@atomchat-io/ui-utils": "^0.2.0",
+    "@fortawesome/angular-fontawesome": "^3.0.0",
+    "@fortawesome/fontawesome-svg-core": "7.1.0",
+    "@fortawesome/free-brands-svg-icons": "7.1.0",
+    "@fortawesome/pro-solid-svg-icons": "7.1.0",
+    "@fortawesome/pro-regular-svg-icons": "7.1.0",
+    "google-libphonenumber": ">=3.0.0",
+    "rxjs": "^7.8.1",
+    "tslib": "^2.5.0"
+  }
+}

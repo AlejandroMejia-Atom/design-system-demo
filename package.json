@@ -8,7 +8,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "install:with-registry": "node scripts/install-with-registry.mjs"
+    "install:with-registry": "node scripts/install-with-registry.mjs",
+    "vendor:pack": "node scripts/vendor-pack.mjs --pack",
+    "vendor:stackblitz": "node scripts/vendor-pack.mjs --apply",
+    "vendor:restore": "node scripts/vendor-pack.mjs --restore"
   },
   "dependencies": {
     "@angular/common": "20.3.16",
@@ -18,14 +21,14 @@
     "@angular/cdk": "20.2.14",
     "@angular/platform-browser": "20.3.16",
     "@angular/router": "20.3.16",
-    "@atomchat-io/ui-design-system": "^0.5.1",
-    "@atomchat-io/ui-tokens": "^0.2.5",
-    "@atomchat-io/ui-utils": "^0.2.0",
+    "@atomchat-io/ui-design-system": "file:vendor/atomchat-io-ui-design-system-0.5.1.tgz",
+    "@atomchat-io/ui-tokens": "file:vendor/atomchat-io-ui-tokens-0.2.5.tgz",
+    "@atomchat-io/ui-utils": "file:vendor/atomchat-io-ui-utils-0.2.0.tgz",
     "@fortawesome/angular-fontawesome": "^3.0.0",
     "@fortawesome/fontawesome-svg-core": "7.1.0",
     "@fortawesome/free-brands-svg-icons": "7.1.0",
-    "@fortawesome/pro-solid-svg-icons": "7.1.0",
-    "@fortawesome/pro-regular-svg-icons": "7.1.0",
+    "@fortawesome/pro-solid-svg-icons": "file:vendor/fortawesome-pro-solid-svg-icons-7.1.0.tgz",
+    "@fortawesome/pro-regular-svg-icons": "file:vendor/fortawesome-pro-regular-svg-icons-7.1.0.tgz",
     "google-libphonenumber": ">=3.0.0",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.0"
@@ -36,5 +39,9 @@
     "@angular/compiler-cli": "20.3.16",
     "sass": "^1.89.2",
     "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "@fortawesome/pro-regular-svg-icons": "file:vendor/fortawesome-pro-regular-svg-icons-7.1.0.tgz",
+    "@fortawesome/pro-solid-svg-icons": "file:vendor/fortawesome-pro-solid-svg-icons-7.1.0.tgz"
   }
 }
