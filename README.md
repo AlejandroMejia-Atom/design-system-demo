@@ -12,15 +12,25 @@ Interactive demo app for every `atom-table` capability in `@atomchat-io/ui-desig
 
    Fill in `ATOMCHAT_NPM_AUTH_TOKEN` and `FONTAWESOME_NPM_AUTH_TOKEN` in `.env`.
 
-2. Install dependencies:
+2. Install dependencies (reads tokens from `.env`; only requires Node.js — no prior `npm install`):
 
    ```bash
    npm run install:with-registry
    ```
 
-   Or, if your shell already exports the tokens:
+   **Manual alternative** — export the variables in your shell, then install:
 
    ```bash
+   export ATOMCHAT_NPM_AUTH_TOKEN=your_token
+   export FONTAWESOME_NPM_AUTH_TOKEN=your_token
+   npm install
+   ```
+
+   PowerShell:
+
+   ```powershell
+   $env:ATOMCHAT_NPM_AUTH_TOKEN = "your_token"
+   $env:FONTAWESOME_NPM_AUTH_TOKEN = "your_token"
    npm install
    ```
 
