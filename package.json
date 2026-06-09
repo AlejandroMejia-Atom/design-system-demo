@@ -1,6 +1,9 @@
 {
   "name": "design-system-table-demo",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
