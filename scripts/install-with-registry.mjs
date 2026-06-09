@@ -1,14 +1,49 @@
 #!/usr/bin/env node
 /**
  * Loads .env into process.env and runs npm install.
- * Cross-platform — only requires Node.js (no prior npm install).
+ * For local development only — not supported inside StackBlitz WebContainers.
  */
 import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { resolve } from 'node:path';
 
-const MAX_ATTEMPTS = 3;
 const envPath = resolve(process.cwd(), '.env');
+
+function isStackBlitz() {
+  return (
+    process.versions.webcontainer != null ||
+    process.env.STACKBLITZ === '1' ||
+    process.env.SHELL?.includes('jsh') === true
+  );
+}
+
+if (isStackBlitz()) {
+  console.error(`
+install:with-registry is for local development only.
+
+StackBlitz WebContainers cannot install private packages from custom registries
+(@atomchat-io/* on npmjs and @fortawesome/pro-* on npm.fontawesome.com).
+Nested "npm install" inside StackBlitz often fails with EIO / cache errors — this
+is a platform limitation, not a project bug.
+
+What to do instead:
+
+  1. Local dev (recommended)
+     cp example.env .env   # add your tokens
+     npm run install:with-registry
+     npm start
+
+  2. StackBlitz Teams / Enterprise
+     Configure private npm registries in workspace settings:
+     https://developer.stackblitz.com/teams/private-npm-registry-integration
+     Do NOT run install:with-registry — deps install when the project opens.
+
+  3. Share a deployed build (Netlify, etc.) instead of a StackBlitz link.
+
+See README.md → "StackBlitz" for details.
+`);
+  process.exit(1);
+}
 
 let envFile;
 try {
@@ -42,43 +77,22 @@ for (const line of envFile.split('\n')) {
 
 const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 const userArgs = process.argv.slice(2);
+const args = ['install', ...userArgs];
 
-function runInstall(attempt) {
-  const args = ['install', ...userArgs];
-  if (attempt > 1) {
-    args.push('--prefer-online');
-  }
+const result = spawnSync(npmCmd, args, {
+  stdio: 'inherit',
+  env: process.env,
+  shell: process.platform === 'win32',
+});
 
-  return spawnSync(npmCmd, args, {
-    stdio: 'inherit',
-    env: process.env,
-    shell: process.platform === 'win32',
-  });
-}
-
-let lastStatus = 1;
-
-for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-  if (attempt > 1) {
-    console.warn(
-      `\nnpm install failed (attempt ${attempt - 1}/${MAX_ATTEMPTS}), retrying with --prefer-online…\n`,
-    );
-  }
-
-  const result = runInstall(attempt);
-  lastStatus = result.status ?? 1;
-
-  if (lastStatus === 0) {
-    process.exit(0);
-  }
-}
-
-console.error(`
-npm install failed after ${MAX_ATTEMPTS} attempts.
+if ((result.status ?? 1) !== 0) {
+  console.error(`
+npm install failed.
 
 If the error mentions EIO or "not found in cache", clear npm's cache and retry:
   npm cache clean --force
   npm run install:with-registry
 `);
+}
 
-process.exit(lastStatus);
+process.exit(result.status ?? 1);

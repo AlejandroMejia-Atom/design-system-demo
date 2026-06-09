@@ -34,12 +34,14 @@ Interactive demo app for every `atom-table` capability in `@atomchat-io/ui-desig
    npm install
    ```
 
-   **Install fails with `EIO` / "not found in cache"?** npm's cache may be corrupted (common in containers). Run:
+   **Install fails with `EIO` / "not found in cache"?** On local machines, clear npm's cache and retry:
 
    ```bash
    npm cache clean --force
    npm run install:with-registry
    ```
+
+   If you are on **StackBlitz**, see the section below — cache clean will not help.
 
 3. Start the dev server:
 
@@ -51,17 +53,17 @@ Interactive demo app for every `atom-table` capability in `@atomchat-io/ui-desig
 
 ## Examples
 
-| Route | Feature |
-|-------|---------|
-| `/examples/basic` | Static table |
-| `/examples/sort` | Column sorting |
-| `/examples/pagination` | Pagination + sort |
-| `/examples/sticky-columns` | Sticky left/right columns |
-| `/examples/selectable` | Row selection (multiple) |
-| `/examples/checkboxes` | Checkbox column + max selection |
-| `/examples/single-selection` | Single selection mode |
-| `/examples/empty-state` | No-data row + empty state |
-| `/examples/cell-patterns` | Auto cell alignment |
+| Route                        | Feature                         |
+| ---------------------------- | ------------------------------- |
+| `/examples/basic`            | Static table                    |
+| `/examples/sort`             | Column sorting                  |
+| `/examples/pagination`       | Pagination + sort               |
+| `/examples/sticky-columns`   | Sticky left/right columns       |
+| `/examples/selectable`       | Row selection (multiple)        |
+| `/examples/checkboxes`       | Checkbox column + max selection |
+| `/examples/single-selection` | Single selection mode           |
+| `/examples/empty-state`      | No-data row + empty state       |
+| `/examples/cell-patterns`    | Auto cell alignment             |
 
 ## Build
 
@@ -70,6 +72,27 @@ npm run build
 ```
 
 Output: `dist/demo/browser` (Netlify-ready).
+
+## StackBlitz
+
+**This project does not run on StackBlitz free / personal tiers.**
+
+The demo depends on private npm packages:
+
+- `@atomchat-io/*` (restricted scope on registry.npmjs.org)
+- `@fortawesome/pro-*` (Font Awesome Pro registry at npm.fontawesome.com)
+
+StackBlitz WebContainers use a browser-based npm client that [does not support custom private registries](https://github.com/stackblitz/webcontainer-core/issues/21) unless you configure **StackBlitz Teams / Enterprise** private registry integration in the workspace dashboard.
+
+Symptoms on StackBlitz include `EIO: '@fortawesome/pro-solid-svg-icons@…' not found in cache`. That is expected — **`npm run install:with-registry` is for local development only** and will exit immediately inside StackBlitz with an explanation.
+
+**Recommended alternatives:**
+
+| Goal              | Approach                                                                                                                                                                              |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Try the demo      | Clone locally → `cp example.env .env` → `npm run install:with-registry` → `npm start`                                                                                                 |
+| Share with others | Deploy `dist/demo/browser` to Netlify (see `netlify.toml`)                                                                                                                            |
+| StackBlitz in org | [Private NPM registry integration](https://developer.stackblitz.com/teams/private-npm-registry-integration) — do not use `install:with-registry`; deps install when the project opens |
 
 ## Stack
 
