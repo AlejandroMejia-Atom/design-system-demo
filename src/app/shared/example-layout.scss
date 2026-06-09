@@ -1,0 +1,58 @@
+.example-page {
+  max-width: 960px;
+}
+
+.example-page__title {
+  margin: 0 0 var(--spacing-xs);
+  font-size: var(--font-size-heading-m);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading-m);
+}
+
+.example-page__description {
+  margin: 0 0 var(--spacing-m);
+  color: var(--fg-secondary);
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+}
+
+.example-page__checklist {
+  margin: 0 0 var(--spacing-l);
+  padding: var(--spacing-m);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  background: var(--bg-secondary);
+  list-style: none;
+}
+
+.example-page__checklist-title {
+  margin: 0 0 var(--spacing-s);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-semibold);
+  color: var(--fg-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.example-page__checklist li {
+  position: relative;
+  margin: 0;
+  padding: var(--spacing-xs) 0 var(--spacing-xs) var(--spacing-l);
+  color: var(--fg-primary);
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+}
+
+.example-page__checklist li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--fg-tertiary);
+}
+
+.example-page__demo {
+  padding: var(--spacing-m);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-m);
+  background: var(--bg-primary);
+}

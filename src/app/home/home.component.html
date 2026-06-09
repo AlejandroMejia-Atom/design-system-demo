@@ -1,0 +1,48 @@
+<div class="home">
+  <header class="home__hero">
+    <h1 class="home__title">{{ app.title }}</h1>
+    <p class="home__subtitle">{{ app.tagline }}</p>
+    @if (hasExamples) {
+      <p class="home__meta">{{ exampleCount }} examples · hot reload</p>
+    }
+  </header>
+
+  @if (hasExamples) {
+    @for (group of groups; track group.label) {
+      <section class="home__section">
+        <h2 class="home__section-title">{{ group.label }}</h2>
+        <div class="home__grid">
+          @for (example of group.examples; track example.id) {
+            <a [routerLink]="example.route" class="home__card">
+              <h3 class="home__card-title">{{ example.title }}</h3>
+              <p class="home__card-description">{{ example.description }}</p>
+              <span class="home__card-cta">Open example →</span>
+            </a>
+          }
+        </div>
+      </section>
+    }
+  } @else {
+    <section class="home__empty">
+      <h2 class="home__section-title">Getting started</h2>
+      <ol class="home__steps">
+        <li>
+          Add example components under <code>src/app/examples/</code> (see
+          <code>src/app/examples/README.md</code>).
+        </li>
+        <li>
+          Register routes in <code>src/app/app.routes.ts</code> and metadata in
+          <code>src/app/shared/demo-config.ts</code>.
+        </li>
+        <li>
+          Wrap each demo with <code>ExamplePageComponent</code> for title,
+          description, and a manual test checklist.
+        </li>
+      </ol>
+      <p class="home__hint">
+        Branch <code>main</code> in this repo contains a full
+        <code>atom-table</code> implementation built on top of this scaffold.
+      </p>
+    </section>
+  }
+</div>
