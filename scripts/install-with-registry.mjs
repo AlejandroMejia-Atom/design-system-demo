@@ -7,6 +7,7 @@ import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { resolve } from 'node:path';
 
+const MAX_ATTEMPTS = 3;
 const envPath = resolve(process.cwd(), '.env');
 
 let envFile;
@@ -40,10 +41,44 @@ for (const line of envFile.split('\n')) {
 }
 
 const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-const result = spawnSync(npmCmd, ['install', ...process.argv.slice(2)], {
-  stdio: 'inherit',
-  env: process.env,
-  shell: process.platform === 'win32',
-});
+const userArgs = process.argv.slice(2);
 
-process.exit(result.status ?? 1);
+function runInstall(attempt) {
+  const args = ['install', ...userArgs];
+  if (attempt > 1) {
+    args.push('--prefer-online');
+  }
+
+  return spawnSync(npmCmd, args, {
+    stdio: 'inherit',
+    env: process.env,
+    shell: process.platform === 'win32',
+  });
+}
+
+let lastStatus = 1;
+
+for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+  if (attempt > 1) {
+    console.warn(
+      `\nnpm install failed (attempt ${attempt - 1}/${MAX_ATTEMPTS}), retrying with --prefer-online…\n`,
+    );
+  }
+
+  const result = runInstall(attempt);
+  lastStatus = result.status ?? 1;
+
+  if (lastStatus === 0) {
+    process.exit(0);
+  }
+}
+
+console.error(`
+npm install failed after ${MAX_ATTEMPTS} attempts.
+
+If the error mentions EIO or "not found in cache", clear npm's cache and retry:
+  npm cache clean --force
+  npm run install:with-registry
+`);
+
+process.exit(lastStatus);

@@ -34,6 +34,13 @@ Interactive demo app for every `atom-table` capability in `@atomchat-io/ui-desig
    npm install
    ```
 
+   **Install fails with `EIO` / "not found in cache"?** npm's cache may be corrupted (common in containers). Run:
+
+   ```bash
+   npm cache clean --force
+   npm run install:with-registry
+   ```
+
 3. Start the dev server:
 
    ```bash
