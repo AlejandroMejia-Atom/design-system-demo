@@ -1,10 +1,10 @@
-@use '@atomchat-io/ui-design-system/styles/scss/config' with (
+@use '@atomchat-io/ui-design-system/src/styles/scss/config' with (
   $atom-prefix: '',
   $use-important: true,
   $atom-dark-mode-class: 'atom-dark-mode'
 );
 
-@use '@atomchat-io/ui-design-system/styles/scss/atom-theme-m3';
+@use '@atomchat-io/ui-design-system/src/styles/scss/atom-theme';
 
 *,
 *::before,
