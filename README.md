@@ -75,24 +75,53 @@ Output: `dist/demo/browser` (Netlify-ready).
 
 ## StackBlitz
 
-**This project does not run on StackBlitz free / personal tiers.**
+**`main` does not run on StackBlitz free / personal tiers** — private packages need registry tokens this environment cannot use.
 
 The demo depends on private npm packages:
 
 - `@atomchat-io/*` (restricted scope on registry.npmjs.org)
 - `@fortawesome/pro-*` (Font Awesome Pro registry at npm.fontawesome.com)
 
-StackBlitz WebContainers use a browser-based npm client that [does not support custom private registries](https://github.com/stackblitz/webcontainer-core/issues/21) unless you configure **StackBlitz Teams / Enterprise** private registry integration in the workspace dashboard.
+StackBlitz WebContainers [do not support custom private registries](https://github.com/stackblitz/webcontainer-core/issues/21) unless you configure **StackBlitz Teams / Enterprise** integration. **`npm run install:with-registry` is for local development only.**
 
-Symptoms on StackBlitz include `EIO: '@fortawesome/pro-solid-svg-icons@…' not found in cache`. That is expected — **`npm run install:with-registry` is for local development only** and will exit immediately inside StackBlitz with an explanation.
+### StackBlitz vendor branch (free tier)
 
-**Recommended alternatives:**
+Vendored tarballs in git avoid private registries and Git LFS (StackBlitz cannot run `git lfs pull`).
+
+**Generate locally** (requires `.env` tokens once):
+
+```bash
+npm run vendor:pack           # vendor/*.tgz
+npm run vendor:stackblitz     # file: deps + lockfile + .npmrc without auth
+```
+
+**Publish:**
+
+```bash
+git checkout -b stackblitz/vendor
+git add -f vendor/*.tgz vendor/manifest.json package.json package-lock.json .npmrc
+git commit -m "chore(stackblitz): vendor private npm packages"
+git push -u origin stackblitz/vendor
+```
+
+Open that branch in StackBlitz — deps install from committed tarballs.
+
+**Back to registry mode on `main`:**
+
+```bash
+npm run vendor:restore
+npm run install:with-registry
+```
+
+See `vendor/README.md` for details.
+
+### Other options
 
 | Goal              | Approach                                                                                                                                                                              |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Try the demo      | Clone locally → `cp example.env .env` → `npm run install:with-registry` → `npm start`                                                                                                 |
 | Share with others | Deploy `dist/demo/browser` to Netlify (see `netlify.toml`)                                                                                                                            |
-| StackBlitz in org | [Private NPM registry integration](https://developer.stackblitz.com/teams/private-npm-registry-integration) — do not use `install:with-registry`; deps install when the project opens |
+| StackBlitz in org | [Private NPM registry integration](https://developer.stackblitz.com/teams/private-npm-registry-integration) — open `main`; deps install when the project opens                        |
 
 ## Stack
 
