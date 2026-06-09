@@ -15,7 +15,7 @@
     "@angular/cdk": "20.2.14",
     "@angular/platform-browser": "20.3.16",
     "@angular/router": "20.3.16",
-    "@atomchat-io/ui-design-system": "^0.5.0",
+    "@atomchat-io/ui-design-system": "^0.5.1",
     "@atomchat-io/ui-tokens": "^0.2.5",
     "@atomchat-io/ui-utils": "^0.2.0",
     "@fortawesome/angular-fontawesome": "^3.0.0",
