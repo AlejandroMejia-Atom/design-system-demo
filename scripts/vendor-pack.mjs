@@ -117,6 +117,25 @@ function fileDependency(tarball) {
   return `file:vendor/${tarball}`;
 }
 
+function rewriteLockfilePublicFontawesome() {
+  const lockPath = resolve(ROOT, 'package-lock.json');
+  let content;
+  try {
+    content = readFileSync(lockPath, 'utf8');
+  } catch {
+    return;
+  }
+  if (!content.includes('npm.fontawesome.com')) {
+    return;
+  }
+  writeFileSync(
+    lockPath,
+    content.replaceAll('https://npm.fontawesome.com/', 'https://registry.npmjs.org/'),
+    'utf8',
+  );
+  console.log('→ Rewrote public @fortawesome URLs in package-lock.json (registry.npmjs.org)');
+}
+
 function applyStackblitzMode(manifest) {
   const packageJson = readJson(PACKAGE_JSON_PATH);
   const savedDependencies = { ...packageJson.dependencies };
@@ -144,6 +163,8 @@ function applyStackblitzMode(manifest) {
 
   copyFileSync(NPMRC_STACKBLITZ_PATH, NPMRC_PATH);
   console.log('\n→ Switched .npmrc to StackBlitz mode (no private registry tokens)');
+
+  rewriteLockfilePublicFontawesome();
 
   const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
   console.log('\n→ Running npm install with vendored tarballs…');
@@ -198,6 +219,13 @@ function main() {
 
   if (mode === '--restore') {
     restoreRegistryMode();
+    return;
+  }
+
+  if (mode === '--fix-lockfile') {
+    copyFileSync(NPMRC_STACKBLITZ_PATH, NPMRC_PATH);
+    rewriteLockfilePublicFontawesome();
+    console.log('\n✓ Lockfile fixed for StackBlitz. Commit package-lock.json and .npmrc.');
     return;
   }
 

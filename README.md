@@ -106,6 +106,14 @@ git push -u origin stackblitz/vendor
 
 Open that branch in StackBlitz — deps install from committed tarballs.
 
+**If install fails with `npm.fontawesome.com` / `ECONNRESET`:** the lockfile still points public `@fortawesome/*` packages at Font Awesome's private registry (from when `.npmrc` routed the whole scope there). Fix locally and recommit:
+
+```bash
+npm run vendor:fix-lockfile
+git add package-lock.json .npmrc
+git commit -m "fix(stackblitz): resolve public @fortawesome from registry.npmjs.org"
+```
+
 **Back to registry mode on `main`:**
 
 ```bash
