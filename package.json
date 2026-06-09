@@ -11,7 +11,8 @@
     "install:with-registry": "node scripts/install-with-registry.mjs",
     "vendor:pack": "node scripts/vendor-pack.mjs --pack",
     "vendor:stackblitz": "node scripts/vendor-pack.mjs --apply",
-    "vendor:restore": "node scripts/vendor-pack.mjs --restore"
+    "vendor:restore": "node scripts/vendor-pack.mjs --restore",
+    "vendor:fix-lockfile": "node scripts/vendor-pack.mjs --fix-lockfile"
   },
   "dependencies": {
     "@angular/common": "20.3.16",

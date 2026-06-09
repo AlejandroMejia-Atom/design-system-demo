@@ -21,7 +21,7 @@ git commit -m "chore(stackblitz): vendor private npm packages"
 git push -u origin stackblitz/vendor
 ```
 
-Open that branch in StackBlitz — `installDependencies` uses the committed tarballs; no Git LFS, no registry tokens.
+**If StackBlitz fails with `npm.fontawesome.com` / `ECONNRESET`:** run `npm run vendor:fix-lockfile` locally and recommit `package-lock.json` + `.npmrc`. Public `@fortawesome/*` must resolve to `registry.npmjs.org`, not Font Awesome's registry.
 
 ## Restore registry mode (main branch)
 
