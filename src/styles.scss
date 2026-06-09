@@ -1,0 +1,31 @@
+@use '@atomchat-io/ui-design-system/styles/scss/config' with (
+  $atom-prefix: '',
+  $use-important: true,
+  $atom-dark-mode-class: 'atom-dark-mode'
+);
+
+@use '@atomchat-io/ui-design-system/styles/scss/atom-theme-m3';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font-family-primary);
+  background-color: var(--bg-primary);
+  color: var(--fg-primary);
+}
+
+body {
+  color-scheme: light;
+}
+
+body.atom-dark-mode {
+  color-scheme: dark;
+}

@@ -25,13 +25,19 @@
             }
           },
           "options": {
-            "assets": [],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "node_modules/@atomchat-io/ui-design-system/src/assets/fonts/inter",
+                "output": "/assets/fonts/inter"
+              }
+            ],
             "index": "src/index.html",
             "browser": "src/main.ts",
             "outputPath": "dist/demo",
             "polyfills": [],
             "scripts": [],
-            "styles": ["src/global_styles.css"],
+            "styles": ["src/styles.scss"],
             "tsConfig": "tsconfig.app.json"
           }
         },
