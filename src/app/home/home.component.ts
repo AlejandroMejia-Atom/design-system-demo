@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import {
-  ALL_TABLE_EXAMPLES,
-  TABLE_EXAMPLE_GROUPS,
-} from '../examples/table/shared/table-examples.catalog';
+  ALL_PAGINATOR_EXAMPLES,
+  PAGINATOR_EXAMPLE_GROUPS,
+} from '../examples/paginator/shared/paginator-examples.catalog';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +13,6 @@ import {
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  protected readonly groups = TABLE_EXAMPLE_GROUPS;
-  protected readonly exampleCount = ALL_TABLE_EXAMPLES.length;
+  protected readonly groups = PAGINATOR_EXAMPLE_GROUPS;
+  protected readonly exampleCount = ALL_PAGINATOR_EXAMPLES.length;
 }

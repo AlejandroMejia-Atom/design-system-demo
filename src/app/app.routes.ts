@@ -11,79 +11,76 @@ export const appRoutes: Routes = [
       {
         path: '',
         component: HomeComponent,
-        title: 'Atom Table Playground',
+        title: 'Atom Paginator Playground',
       },
       {
-        path: 'examples/basic',
+        path: 'examples/first-page',
         loadComponent: () =>
-          import('./examples/table/basic/basic-example.component').then(
-            (m) => m.BasicExampleComponent,
+          import('./examples/paginator/paginator-state-example.component').then(
+            (m) => m.PaginatorStateExampleComponent,
           ),
-        title: 'Basic Table',
+        data: { exampleId: 'first-page' },
+        title: 'First page',
       },
       {
-        path: 'examples/sort',
+        path: 'examples/middle-page',
         loadComponent: () =>
-          import('./examples/table/sort/sort-example.component').then(
-            (m) => m.SortExampleComponent,
+          import('./examples/paginator/paginator-state-example.component').then(
+            (m) => m.PaginatorStateExampleComponent,
           ),
-        title: 'Sortable Table',
+        data: { exampleId: 'middle-page' },
+        title: 'Middle page',
       },
       {
-        path: 'examples/pagination',
+        path: 'examples/last-page',
         loadComponent: () =>
-          import('./examples/table/pagination/pagination-example.component').then(
-            (m) => m.PaginationExampleComponent,
+          import('./examples/paginator/paginator-state-example.component').then(
+            (m) => m.PaginatorStateExampleComponent,
           ),
-        title: 'Paginated Table',
+        data: { exampleId: 'last-page' },
+        title: 'Last page',
       },
       {
-        path: 'examples/sticky-columns',
+        path: 'examples/single-page',
         loadComponent: () =>
-          import('./examples/table/sticky-columns/sticky-columns-example.component').then(
-            (m) => m.StickyColumnsExampleComponent,
+          import('./examples/paginator/paginator-state-example.component').then(
+            (m) => m.PaginatorStateExampleComponent,
           ),
-        title: 'Sticky Columns',
+        data: { exampleId: 'single-page' },
+        title: 'Single page',
       },
       {
-        path: 'examples/selectable',
+        path: 'examples/empty-dataset',
         loadComponent: () =>
-          import('./examples/table/selectable/selectable-example.component').then(
-            (m) => m.SelectableExampleComponent,
+          import('./examples/paginator/paginator-state-example.component').then(
+            (m) => m.PaginatorStateExampleComponent,
           ),
-        title: 'Selectable Rows',
+        data: { exampleId: 'empty-dataset' },
+        title: 'Empty dataset',
       },
       {
-        path: 'examples/checkboxes',
+        path: 'examples/i18n-spanish',
         loadComponent: () =>
-          import('./examples/table/checkboxes/checkboxes-example.component').then(
-            (m) => m.CheckboxesExampleComponent,
+          import('./examples/paginator/i18n-spanish-example.component').then(
+            (m) => m.I18nSpanishExampleComponent,
           ),
-        title: 'Selection Checkboxes',
+        title: 'Custom labels (Spanish)',
       },
       {
-        path: 'examples/single-selection',
+        path: 'examples/i18n-item-range',
         loadComponent: () =>
-          import('./examples/table/single-selection/single-selection-example.component').then(
-            (m) => m.SingleSelectionExampleComponent,
+          import('./examples/paginator/i18n-item-range-example.component').then(
+            (m) => m.I18nItemRangeExampleComponent,
           ),
-        title: 'Single Selection',
+        title: 'Custom page-info (item range)',
       },
       {
-        path: 'examples/empty-state',
+        path: 'examples/data-source',
         loadComponent: () =>
-          import('./examples/table/empty-state/empty-state-example.component').then(
-            (m) => m.EmptyStateExampleComponent,
+          import('./examples/paginator/data-source-example.component').then(
+            (m) => m.DataSourceExampleComponent,
           ),
-        title: 'Empty State',
-      },
-      {
-        path: 'examples/cell-patterns',
-        loadComponent: () =>
-          import('./examples/table/cell-patterns/cell-patterns-example.component').then(
-            (m) => m.CellPatternsExampleComponent,
-          ),
-        title: 'Cell Patterns',
+        title: 'Client-side data source',
       },
     ],
   },

@@ -1,6 +1,7 @@
-# Atom Table Playground
+# Atom Paginator Playground
 
-Interactive demo app for every `atom-table` capability in `@atomchat-io/ui-design-system` v0.5.0.
+Interactive demos for the full `atom-pagination` API in `@atomchat-io/ui-design-system` v0.5.0.
+Includes vendored private packages for StackBlitz.
 
 ## Quick start
 
@@ -18,30 +19,14 @@ Interactive demo app for every `atom-table` capability in `@atomchat-io/ui-desig
    npm run install:with-registry
    ```
 
-   **Manual alternative** — export the variables in your shell, then install:
-
-   ```bash
-   export ATOMCHAT_NPM_AUTH_TOKEN=your_token
-   export FONTAWESOME_NPM_AUTH_TOKEN=your_token
-   npm install
-   ```
-
-   PowerShell:
-
-   ```powershell
-   $env:ATOMCHAT_NPM_AUTH_TOKEN = "your_token"
-   $env:FONTAWESOME_NPM_AUTH_TOKEN = "your_token"
-   npm install
-   ```
-
-   **Install fails with `EIO` / "not found in cache"?** On local machines, clear npm's cache and retry:
+   **Install fails with `EIO` / "not found in cache"?** On local machines:
 
    ```bash
    npm cache clean --force
    npm run install:with-registry
    ```
 
-   If you are on **StackBlitz**, see the section below — cache clean will not help.
+   If you are on **StackBlitz**, deps install from committed `vendor/*.tgz` — see below.
 
 3. Start the dev server:
 
@@ -53,17 +38,16 @@ Interactive demo app for every `atom-table` capability in `@atomchat-io/ui-desig
 
 ## Examples
 
-| Route                        | Feature                         |
-| ---------------------------- | ------------------------------- |
-| `/examples/basic`            | Static table                    |
-| `/examples/sort`             | Column sorting                  |
-| `/examples/pagination`       | Pagination + sort               |
-| `/examples/sticky-columns`   | Sticky left/right columns       |
-| `/examples/selectable`       | Row selection (multiple)        |
-| `/examples/checkboxes`       | Checkbox column + max selection |
-| `/examples/single-selection` | Single selection mode           |
-| `/examples/empty-state`      | No-data row + empty state       |
-| `/examples/cell-patterns`    | Auto cell alignment             |
+| Route | Feature |
+| ----- | ------- |
+| `/examples/first-page` | Default first-page state |
+| `/examples/middle-page` | Mid-range page index |
+| `/examples/last-page` | Last page — disabled next/last |
+| `/examples/single-page` | Dataset smaller than page size |
+| `/examples/empty-dataset` | `length = 0` empty state |
+| `/examples/i18n-spanish` | `AtomPaginatorIntl` — Spanish labels |
+| `/examples/i18n-item-range` | Custom `getRangeLabel` — item range format |
+| `/examples/data-source` | Client-side slice via `pageChange` + `AtomTableDataSource` hint |
 
 ## Build
 
@@ -75,61 +59,19 @@ Output: `dist/demo/browser` (Netlify-ready).
 
 ## StackBlitz
 
-**`main` does not run on StackBlitz free / personal tiers** — private packages need registry tokens this environment cannot use.
+This branch ships with vendored tarballs — no private registry tokens required.
 
-The demo depends on private npm packages:
-
-- `@atomchat-io/*` (restricted scope on registry.npmjs.org)
-- `@fortawesome/pro-*` (Font Awesome Pro registry at npm.fontawesome.com)
-
-StackBlitz WebContainers [do not support custom private registries](https://github.com/stackblitz/webcontainer-core/issues/21) unless you configure **StackBlitz Teams / Enterprise** integration. **`npm run install:with-registry` is for local development only.**
-
-### StackBlitz vendor branch (free tier)
-
-Vendored tarballs in git avoid private registries and Git LFS (StackBlitz cannot run `git lfs pull`).
-
-**Generate locally** (requires `.env` tokens once):
-
-```bash
-npm run vendor:pack           # vendor/*.tgz
-npm run vendor:stackblitz     # file: deps + lockfile + .npmrc without auth
+```
+https://stackblitz.com/github/{ORG}/design-system-table/tree/feature/design-system-paginator?title=Atom%20Paginator
 ```
 
-**Publish:**
-
-```bash
-git checkout -b stackblitz/vendor
-git add -f vendor/*.tgz vendor/manifest.json package.json package-lock.json .npmrc
-git commit -m "chore(stackblitz): vendor private npm packages"
-git push -u origin stackblitz/vendor
-```
-
-Open that branch in StackBlitz — deps install from committed tarballs.
-
-**If install fails with `npm.fontawesome.com` / `ECONNRESET`:** the lockfile still points public `@fortawesome/*` packages at Font Awesome's private registry (from when `.npmrc` routed the whole scope there). Fix locally and recommit:
+**If install fails with `npm.fontawesome.com` / `ECONNRESET`:**
 
 ```bash
 npm run vendor:fix-lockfile
-git add package-lock.json .npmrc
-git commit -m "fix(stackblitz): resolve public @fortawesome from registry.npmjs.org"
 ```
 
-**Back to registry mode on `main`:**
-
-```bash
-npm run vendor:restore
-npm run install:with-registry
-```
-
-See `vendor/README.md` for details.
-
-### Other options
-
-| Goal              | Approach                                                                                                                                                                              |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Try the demo      | Clone locally → `cp example.env .env` → `npm run install:with-registry` → `npm start`                                                                                                 |
-| Share with others | Deploy `dist/demo/browser` to Netlify (see `netlify.toml`)                                                                                                                            |
-| StackBlitz in org | [Private NPM registry integration](https://developer.stackblitz.com/teams/private-npm-registry-integration) — open `main`; deps install when the project opens                        |
+See `vendor/README.md` for vendor workflow details.
 
 ## Stack
 
@@ -137,4 +79,4 @@ See `vendor/README.md` for details.
 - `@atomchat-io/ui-design-system` + `@atomchat-io/ui-tokens`
 - Font Awesome Pro (peer dependency for icons)
 
-Examples are ported from atom-ui Storybook stories in `libs/ui-design-system/src/lib/components/table/table.stories.ts`.
+Examples are ported from atom-ui Storybook stories in `libs/ui-design-system/src/lib/components/pagination/atom-pagination.stories.ts`.

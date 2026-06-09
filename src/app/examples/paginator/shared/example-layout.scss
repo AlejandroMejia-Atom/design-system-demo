@@ -1,0 +1,123 @@
+.example-page {
+  max-width: 960px;
+}
+
+.example-page__title {
+  margin: 0 0 var(--spacing-xs);
+  font-size: var(--font-size-heading-m);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading-m);
+}
+
+.example-page__description {
+  margin: 0 0 var(--spacing-m);
+  color: var(--fg-secondary);
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+}
+
+.example-page__checklist {
+  margin: 0 0 var(--spacing-l);
+  padding: var(--spacing-m);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  background: var(--bg-secondary);
+  list-style: none;
+}
+
+.example-page__checklist-title {
+  margin: 0 0 var(--spacing-s);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-semibold);
+  color: var(--fg-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.example-page__checklist li {
+  position: relative;
+  margin: 0;
+  padding: var(--spacing-xs) 0 var(--spacing-xs) var(--spacing-l);
+  color: var(--fg-primary);
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+}
+
+.example-page__checklist li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--fg-tertiary);
+}
+
+.example-page__demo {
+  padding: var(--spacing-m);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-m);
+  background: var(--bg-primary);
+}
+
+.example-page__demo atom-pagination {
+  margin-top: var(--spacing-m);
+}
+
+.example-page__item-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  overflow: hidden;
+}
+
+.example-page__item {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-m);
+  padding: var(--spacing-s) var(--spacing-m);
+  border-bottom: 1px solid var(--border-primary);
+  font-size: var(--font-size-body-s);
+}
+
+.example-page__item:last-child {
+  border-bottom: 0;
+}
+
+.example-page__item-status {
+  color: var(--fg-secondary);
+}
+
+.example-page__panel {
+  margin-top: var(--spacing-m);
+  padding: var(--spacing-m);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-s);
+  background: var(--bg-secondary);
+}
+
+.example-page__panel-title {
+  margin: 0 0 var(--spacing-s);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-semibold);
+  color: var(--fg-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.example-page__event-log,
+.example-page__code-hint {
+  margin: 0;
+  font-family: var(--font-family-mono, ui-monospace, monospace);
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+  white-space: pre-wrap;
+  color: var(--fg-primary);
+}
+
+.example-page__code-hint {
+  margin-top: var(--spacing-m);
+  padding: var(--spacing-m);
+  border-radius: var(--radius-s);
+  background: var(--bg-secondary);
+  color: var(--fg-secondary);
+}
