@@ -1,0 +1,66 @@
+<div class="shell" [class.shell--sidebar-open]="sidebarOpen()">
+  <header class="shell__header">
+    <button
+      type="button"
+      class="shell__menu-btn"
+      aria-label="Toggle navigation"
+      (click)="toggleSidebar()"
+    >
+      ☰
+    </button>
+
+    <a routerLink="/" class="shell__brand" (click)="closeSidebar()">
+      Atom Table Playground
+    </a>
+
+    <button
+      type="button"
+      class="shell__theme-btn"
+      (click)="toggleTheme()"
+      [attr.aria-label]="theme.isDark() ? 'Switch to light theme' : 'Switch to dark theme'"
+    >
+      {{ theme.isDark() ? 'Light' : 'Dark' }}
+    </button>
+  </header>
+
+  <div class="shell__body">
+    <nav class="shell__sidebar" aria-label="Table examples">
+      <a
+        routerLink="/"
+        routerLinkActive="shell__link--active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="shell__link"
+        (click)="closeSidebar()"
+      >
+        Overview
+      </a>
+
+      @for (group of groups; track group.label) {
+        <p class="shell__group-label">{{ group.label }}</p>
+        @for (example of group.examples; track example.id) {
+          <a
+            [routerLink]="example.route"
+            routerLinkActive="shell__link--active"
+            class="shell__link shell__link--nested"
+            (click)="closeSidebar()"
+          >
+            {{ example.title }}
+          </a>
+        }
+      }
+    </nav>
+
+    @if (sidebarOpen()) {
+      <button
+        type="button"
+        class="shell__backdrop"
+        aria-label="Close navigation"
+        (click)="closeSidebar()"
+      ></button>
+    }
+
+    <main class="shell__content">
+      <router-outlet />
+    </main>
+  </div>
+</div>
