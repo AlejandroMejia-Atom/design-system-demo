@@ -57,6 +57,11 @@
   background: var(--bg-primary);
 }
 
+.example-page__table-viewport {
+  max-height: min(24rem, 60vh);
+  overflow: auto;
+}
+
 .example-page__demo atom-pagination {
   margin-top: var(--spacing-m);
 }

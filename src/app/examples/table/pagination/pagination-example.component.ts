@@ -23,6 +23,7 @@ const meta = ALL_TABLE_EXAMPLES.find((e) => e.id === 'pagination')!;
       [description]="meta.description"
       [checklist]="meta.checklist"
     >
+      <div class="example-page__table-viewport">
       <table atom-table [dataSource]="dataSource" atomSort>
         <ng-container atomColumnDef="name">
           <th atomHeaderCell *atomHeaderCellDef atomSortHeader="name">Name</th>
@@ -42,6 +43,7 @@ const meta = ALL_TABLE_EXAMPLES.find((e) => e.id === 'pagination')!;
         <tr atom-header-row *atomHeaderRowDef="displayedColumns"></tr>
         <tr atom-row *atomRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      </div>
 
       <atom-pagination
         #paginator

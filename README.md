@@ -1,6 +1,6 @@
-# Atom Design System Demo — Base Scaffold
+# Atom Table Playground
 
-Reusable Angular playground for `@atomchat-io/ui-design-system` component demos. This branch (`demo/base`) ships the repo and UI shell **without** any component examples — use it as a starting point for new interactive demos.
+Interactive demo app for every `atom-table` capability in `@atomchat-io/ui-design-system` v0.5.0.
 
 ## Quick start
 
@@ -12,10 +12,26 @@ Reusable Angular playground for `@atomchat-io/ui-design-system` component demos.
 
    Fill in `ATOMCHAT_NPM_AUTH_TOKEN` and `FONTAWESOME_NPM_AUTH_TOKEN` in `.env`.
 
-2. Install dependencies:
+2. Install dependencies (reads tokens from `.env`; only requires Node.js — no prior `npm install`):
 
    ```bash
    npm run install:with-registry
+   ```
+
+   **Manual alternative** — export the variables in your shell, then install:
+
+   ```bash
+   export ATOMCHAT_NPM_AUTH_TOKEN=your_token
+   export FONTAWESOME_NPM_AUTH_TOKEN=your_token
+   npm install
+   ```
+
+   PowerShell:
+
+   ```powershell
+   $env:ATOMCHAT_NPM_AUTH_TOKEN = "your_token"
+   $env:FONTAWESOME_NPM_AUTH_TOKEN = "your_token"
+   npm install
    ```
 
 3. Start the dev server:
@@ -24,29 +40,21 @@ Reusable Angular playground for `@atomchat-io/ui-design-system` component demos.
    npm start
    ```
 
-   Open [http://localhost:4200](http://localhost:4200).
+   Open [http://localhost:4200](http://localhost:4200). Each example is a lazy-loaded route with a sidebar, theme toggle, and a “What to test” checklist.
 
-## What's included
+## Examples
 
-- Angular 20 standalone app (zoneless)
-- Atom theme SCSS, Inter fonts, design tokens
-- Private registry setup (`.npmrc`, `example.env`, `install:with-registry`)
-- App shell: sidebar navigation, theme toggle, responsive layout
-- `ExamplePageComponent` wrapper for demo pages with checklists
-- `demo-config.ts` for app branding and example catalog metadata
-- Netlify-ready production build
-
-## Adding a new demo
-
-See [`src/app/examples/README.md`](src/app/examples/README.md).
-
-1. Create a component under `src/app/examples/<feature>/`
-2. Register metadata in `src/app/shared/demo-config.ts`
-3. Add a lazy route in `src/app/app.routes.ts`
-
-## Reference implementation
-
-Branch `main` contains a full `atom-table` playground built on top of this scaffold.
+| Route | Feature |
+|-------|---------|
+| `/examples/basic` | Static table |
+| `/examples/sort` | Column sorting |
+| `/examples/pagination` | Pagination + sort |
+| `/examples/sticky-columns` | Sticky left/right columns |
+| `/examples/selectable` | Row selection (multiple) |
+| `/examples/checkboxes` | Checkbox column + max selection |
+| `/examples/single-selection` | Single selection mode |
+| `/examples/empty-state` | No-data row + empty state |
+| `/examples/cell-patterns` | Auto cell alignment |
 
 ## Build
 
@@ -54,4 +62,12 @@ Branch `main` contains a full `atom-table` playground built on top of this scaff
 npm run build
 ```
 
-Output: `dist/demo/browser`.
+Output: `dist/demo/browser` (Netlify-ready).
+
+## Stack
+
+- Angular 20 (standalone, zoneless)
+- `@atomchat-io/ui-design-system` + `@atomchat-io/ui-tokens`
+- Font Awesome Pro (peer dependency for icons)
+
+Examples are ported from atom-ui Storybook stories in `libs/ui-design-system/src/lib/components/table/table.stories.ts`.

@@ -1,11 +1,14 @@
 {
   "name": "design-system-demo",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "install:with-registry": "dotenv -e .env -- npm install"
+    "install:with-registry": "node scripts/install-with-registry.mjs"
   },
   "dependencies": {
     "@angular/common": "20.3.16",
@@ -31,7 +34,6 @@
     "@angular/build": "20.3.15",
     "@angular/cli": "20.3.15",
     "@angular/compiler-cli": "20.3.16",
-    "dotenv-cli": "^8.0.0",
     "sass": "^1.89.2",
     "typescript": "^5.9.3"
   }

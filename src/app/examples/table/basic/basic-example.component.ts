@@ -22,6 +22,7 @@ const meta = ALL_TABLE_EXAMPLES.find((e) => e.id === 'basic')!;
       [description]="meta.description"
       [checklist]="meta.checklist"
     >
+      <div class="example-page__table-viewport">
       <table atom-table [dataSource]="dataSource">
         <ng-container atomColumnDef="name">
           <th atomHeaderCell *atomHeaderCellDef>Name</th>
@@ -41,6 +42,7 @@ const meta = ALL_TABLE_EXAMPLES.find((e) => e.id === 'basic')!;
         <tr atom-header-row *atomHeaderRowDef="displayedColumns"></tr>
         <tr atom-row *atomRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      </div>
     </app-example-page>
   `,
   styleUrl: '../shared/example-layout.scss',
