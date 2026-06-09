@@ -1,0 +1,26 @@
+<div class="home">
+  <header class="home__hero">
+    <h1 class="home__title">Atom Table Playground</h1>
+    <p class="home__subtitle">
+      Interactive examples for every <code>atom-table</code> capability shipped in
+      <code>@atomchat-io/ui-design-system</code> v0.5.0. Pick an example from the
+      sidebar or the cards below.
+    </p>
+    <p class="home__meta">{{ exampleCount }} examples · client-side data · hot reload</p>
+  </header>
+
+  @for (group of groups; track group.label) {
+    <section class="home__section">
+      <h2 class="home__section-title">{{ group.label }}</h2>
+      <div class="home__grid">
+        @for (example of group.examples; track example.id) {
+          <a [routerLink]="example.route" class="home__card">
+            <h3 class="home__card-title">{{ example.title }}</h3>
+            <p class="home__card-description">{{ example.description }}</p>
+            <span class="home__card-cta">Open example →</span>
+          </a>
+        }
+      </div>
+    </section>
+  }
+</div>
