@@ -1,0 +1,21 @@
+.full-table-demo-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s);
+  padding: var(--spacing-none) var(--spacing-none) var(--spacing-m);
+  color: var(--fg-secondary);
+}
+
+.full-table-layout-shell {
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+}
+
+.full-table-demo {
+  position: relative;
+}
+
+.full-table-demo atom-bulk-action-bar {
+  margin-top: var(--spacing-m);
+}
