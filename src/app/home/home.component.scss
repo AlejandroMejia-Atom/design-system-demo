@@ -36,14 +36,21 @@
 
 .home__section-title {
   margin: 0 0 var(--spacing-m);
+  color: var(--fg-primary);
   font-size: var(--font-size-heading-s);
   font-weight: var(--font-weight-semibold);
 }
 
 .home__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--spacing-m);
+}
+
+@media (min-width: 30rem) {
+  .home__grid {
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  }
 }
 
 .home__card {
