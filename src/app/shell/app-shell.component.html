@@ -1,5 +1,5 @@
 <div class="shell" [class.shell--sidebar-open]="sidebarOpen()">
-  <header class="shell__header">
+  <header class="shell__header px-m gap-m">
     <button
       type="button"
       class="shell__menu-btn"
@@ -9,13 +9,13 @@
       ☰
     </button>
 
-    <a routerLink="/" class="shell__brand" (click)="closeSidebar()">
+    <a routerLink="/" class="shell__brand typography-body-bold fg-primary" (click)="closeSidebar()">
       Atom Table Playground
     </a>
 
     <button
       type="button"
-      class="shell__theme-btn"
+      class="shell__theme-btn typography-caption-regular px-s py-xs"
       (click)="toggleTheme()"
       [attr.aria-label]="theme.isDark() ? 'Switch to light theme' : 'Switch to dark theme'"
     >
@@ -24,24 +24,26 @@
   </header>
 
   <div class="shell__body">
-    <nav class="shell__sidebar" aria-label="Table examples">
+    <nav class="shell__sidebar p-m gap-xxs bg-secondary" aria-label="Table examples">
       <a
         routerLink="/"
         routerLinkActive="shell__link--active"
         [routerLinkActiveOptions]="{ exact: true }"
-        class="shell__link"
+        class="shell__link typography-caption-regular fg-secondary px-s py-xs"
         (click)="closeSidebar()"
       >
         Overview
       </a>
 
       @for (group of groups; track group.label) {
-        <p class="shell__group-label">{{ group.label }}</p>
+        <p class="shell__group-label typography-label-bold fg-tertiary px-s">
+          {{ group.label }}
+        </p>
         @for (example of group.examples; track example.id) {
           <a
             [routerLink]="example.route"
             routerLinkActive="shell__link--active"
-            class="shell__link shell__link--nested"
+            class="shell__link shell__link--nested typography-caption-regular fg-secondary px-s py-xs"
             (click)="closeSidebar()"
           >
             {{ example.title }}
@@ -59,7 +61,7 @@
       ></button>
     }
 
-    <main class="shell__content">
+    <main class="shell__content p-l">
       <router-outlet />
     </main>
   </div>

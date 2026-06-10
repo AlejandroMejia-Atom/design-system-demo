@@ -20,21 +20,18 @@ html {
 body {
   height: 100%;
   height: 100dvh;
-  margin: 0;
-  padding: 0;
+  margin: var(--spacing-none);
+  padding: var(--spacing-none);
   overflow: hidden;
   font-family: var(--font-family-primary);
   background-color: var(--bg-primary);
   color: var(--fg-primary);
+  color-scheme: light;
 }
 
 app-root {
   display: block;
   height: 100%;
-}
-
-body {
-  color-scheme: light;
 }
 
 body.atom-dark-mode {

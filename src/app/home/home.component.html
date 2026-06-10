@@ -1,23 +1,29 @@
 <div class="home">
-  <header class="home__hero">
-    <h1 class="home__title">Atom Table Playground</h1>
-    <p class="home__subtitle">
+  <header class="home__hero mb-xl">
+    <h1 class="home__title typography-h3-bold mb-s">Atom Table Playground</h1>
+    <p class="home__subtitle typography-body-regular fg-secondary mb-s">
       Interactive examples for every <code>atom-table</code> capability shipped in
       <code>@atomchat-io/ui-design-system</code> v0.5.0. Pick an example from the
       sidebar or the cards below.
     </p>
-    <p class="home__meta">{{ exampleCount }} examples · client-side data · hot reload</p>
+    <p class="home__meta typography-caption-regular fg-tertiary">
+      {{ exampleCount }} examples · client-side data · hot reload
+    </p>
   </header>
 
   @for (group of groups; track group.label) {
-    <section class="home__section">
-      <h2 class="home__section-title">{{ group.label }}</h2>
-      <div class="home__grid">
+    <section class="home__section mb-xl">
+      <h2 class="home__section-title typography-heading-bold fg-primary mb-m">
+        {{ group.label }}
+      </h2>
+      <div class="home__grid gap-m">
         @for (example of group.examples; track example.id) {
-          <a [routerLink]="example.route" class="home__card">
-            <h3 class="home__card-title">{{ example.title }}</h3>
-            <p class="home__card-description">{{ example.description }}</p>
-            <span class="home__card-cta">Open example →</span>
+          <a [routerLink]="example.route" class="home__card p-m gap-xs bg-secondary">
+            <h3 class="home__card-title typography-body-bold">{{ example.title }}</h3>
+            <p class="home__card-description typography-caption-regular fg-secondary">
+              {{ example.description }}
+            </p>
+            <span class="home__card-cta typography-label-bold fg-tertiary">Open example →</span>
           </a>
         }
       </div>

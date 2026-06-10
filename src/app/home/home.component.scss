@@ -1,50 +1,14 @@
 .home {
-  max-width: 960px;
-}
-
-.home__hero {
-  margin-bottom: var(--spacing-xl);
-}
-
-.home__title {
-  margin: 0 0 var(--spacing-s);
-  font-size: var(--font-size-heading-l);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-heading-l);
-}
-
-.home__subtitle {
-  margin: 0 0 var(--spacing-s);
-  color: var(--fg-secondary);
-  font-size: var(--font-size-body-m);
-  line-height: var(--line-height-body-m);
+  max-width: 60rem;
 }
 
 .home__subtitle code {
   font-size: 0.9em;
 }
 
-.home__meta {
-  margin: 0;
-  color: var(--fg-tertiary);
-  font-size: var(--font-size-body-s);
-}
-
-.home__section {
-  margin-bottom: var(--spacing-xl);
-}
-
-.home__section-title {
-  margin: 0 0 var(--spacing-m);
-  color: var(--fg-primary);
-  font-size: var(--font-size-heading-s);
-  font-weight: var(--font-weight-semibold);
-}
-
 .home__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-m);
 }
 
 @media (min-width: 30rem) {
@@ -56,11 +20,8 @@
 .home__card {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-m);
-  border: 1px solid var(--border-primary);
+  border: var(--stroke-xs) solid var(--border-primary);
   border-radius: var(--radius-m);
-  background: var(--bg-secondary);
   color: inherit;
   text-decoration: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -68,25 +29,24 @@
 
 .home__card:hover {
   border-color: var(--border-secondary);
-  box-shadow: var(--elevation-s);
-}
-
-.home__card-title {
-  margin: 0;
-  font-size: var(--font-size-body-m);
-  font-weight: var(--font-weight-semibold);
+  box-shadow: var(--effects-shadows-elevation-card);
 }
 
 .home__card-description {
   flex: 1;
-  margin: 0;
-  color: var(--fg-secondary);
-  font-size: var(--font-size-body-s);
-  line-height: var(--line-height-body-s);
+  margin: var(--spacing-none);
 }
 
-.home__card-cta {
-  color: var(--fg-tertiary);
-  font-size: var(--font-size-label);
-  font-weight: var(--font-weight-semibold);
+.home__card-title,
+.home__card-cta,
+.home__title,
+.home__subtitle,
+.home__meta,
+.home__section-title {
+  margin: var(--spacing-none);
+}
+
+.home__hero,
+.home__section {
+  margin: var(--spacing-none);
 }

@@ -1,5 +1,5 @@
 .shell {
-  --shell-header-height: 3.25rem;
+  --shell-header-height: var(--spacing-5xxl);
   --shell-sidebar-width: 15rem;
 
   height: 100%;
@@ -9,16 +9,14 @@
 
 .shell__header {
   position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
+  top: var(--spacing-none);
+  right: var(--spacing-none);
+  left: var(--spacing-none);
   z-index: 30;
   display: flex;
   align-items: center;
-  gap: var(--spacing-m);
   height: var(--shell-header-height);
-  padding: 0 var(--spacing-m);
-  border-bottom: 1px solid var(--border-primary);
+  border-bottom: var(--stroke-xs) solid var(--border-primary);
   background: var(--bg-secondary);
 }
 
@@ -28,51 +26,39 @@
   justify-content: center;
   width: 2.25rem;
   height: 2.25rem;
-  padding: 0;
-  border: 1px solid var(--border-primary);
+  padding: var(--spacing-none);
+  border: var(--stroke-xs) solid var(--border-primary);
   border-radius: var(--radius-s);
   background: var(--bg-primary);
   color: var(--fg-primary);
   cursor: pointer;
-  font-size: 1.125rem;
+  font-size: var(--font-size-caption);
 }
 
 .shell__brand {
   flex: 1;
-  color: var(--fg-primary);
-  font-size: var(--font-size-body-m);
-  font-weight: var(--font-weight-semibold);
   text-decoration: none;
 }
 
 .shell__theme-btn {
-  padding: var(--spacing-xs) var(--spacing-s);
-  border: 1px solid var(--border-primary);
+  border: var(--stroke-xs) solid var(--border-primary);
   border-radius: var(--radius-s);
   background: var(--bg-primary);
   color: var(--fg-primary);
   cursor: pointer;
-  font-size: var(--font-size-body-s);
 }
 
 .shell__sidebar {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2xs);
   width: var(--shell-sidebar-width);
-  padding: var(--spacing-m);
-  border-right: 1px solid var(--border-primary);
-  background: var(--bg-secondary);
+  border-right: var(--stroke-xs) solid var(--border-primary);
   overflow-y: auto;
   overscroll-behavior: contain;
 }
 
 .shell__group-label {
-  margin: var(--spacing-m) 0 var(--spacing-2xs);
-  padding: 0 var(--spacing-s);
-  color: var(--fg-tertiary);
-  font-size: var(--font-size-label);
-  font-weight: var(--font-weight-semibold);
+  margin: var(--spacing-m) var(--spacing-none) var(--spacing-xxs);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -83,10 +69,7 @@
 
 .shell__link {
   display: block;
-  padding: var(--spacing-xs) var(--spacing-s);
   border-radius: var(--radius-s);
-  color: var(--fg-secondary);
-  font-size: var(--font-size-body-s);
   text-decoration: none;
 }
 
@@ -102,18 +85,17 @@
 .shell__link--active {
   background: var(--bg-tertiary);
   color: var(--fg-primary);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-bold);
 }
 
 .shell__content {
   position: fixed;
   top: var(--shell-header-height);
-  right: 0;
-  bottom: 0;
-  left: 0;
+  right: var(--spacing-none);
+  bottom: var(--spacing-none);
+  left: var(--spacing-none);
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: var(--spacing-l);
   background-color: var(--bg-primary);
 }
 
@@ -129,12 +111,12 @@
   .shell__sidebar {
     position: fixed;
     top: var(--shell-header-height);
-    bottom: 0;
-    left: 0;
+    bottom: var(--spacing-none);
+    left: var(--spacing-none);
     z-index: 20;
     transform: translateX(-100%);
     transition: transform 0.2s ease;
-    box-shadow: var(--elevation-m);
+    box-shadow: var(--effects-shadows-elevation-popover);
   }
 
   .shell--sidebar-open .shell__sidebar {
@@ -144,10 +126,10 @@
   .shell__backdrop {
     display: block;
     position: fixed;
-    inset: var(--shell-header-height) 0 0 0;
+    inset: var(--shell-header-height) var(--spacing-none) var(--spacing-none) var(--spacing-none);
     z-index: 10;
-    border: 0;
-    background: rgb(0 0 0 / 40%);
+    border: var(--stroke-none);
+    background: var(--bg-overlay-primary);
     cursor: pointer;
   }
 }
@@ -160,8 +142,8 @@
   .shell__sidebar {
     position: fixed;
     top: var(--shell-header-height);
-    bottom: 0;
-    left: 0;
+    bottom: var(--spacing-none);
+    left: var(--spacing-none);
     z-index: 20;
   }
 
