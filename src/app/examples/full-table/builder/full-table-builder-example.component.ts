@@ -35,6 +35,7 @@ import { ExamplePageComponent } from '../../table/shared/example-page.component'
 import { ALL_FULL_TABLE_EXAMPLES } from '../shared/full-table-examples.catalog';
 import { TABLE_BUILDER_DEMO_IMPORTS } from '../shared/table-builder.imports';
 import {
+  BUILDER_COLUMNS,
   ROLE_FILTER_ITEMS,
   STATUS_FILTER_ITEMS,
   trackUserByEmail,
@@ -115,18 +116,14 @@ const meta = ALL_FULL_TABLE_EXAMPLES.find((e) => e.id === 'full-table-builder')!
             </button>
           </atom-toolbar>
 
-          @if (columns().length) {
-            @for (mountKey of [demo.builderMountKey()]; track mountKey) {
-              <atom-table-builder
-                [columns]="columns()"
-                [dataSource]="demo.dataSource"
-                [atomTrackBy]="trackBy"
-                [selectable]="true"
-                [multiple]="true"
-                (selectionChange)="demo.onSelectionChange($event)"
-              />
-            }
-          }
+          <atom-table-builder
+            [columns]="columns()"
+            [dataSource]="demo.dataSource"
+            [atomTrackBy]="trackBy"
+            [selectable]="true"
+            [multiple]="true"
+            (selectionChange)="demo.onSelectionChange($event)"
+          />
 
           <atom-pagination
             #paginator
@@ -187,8 +184,8 @@ export class FullTableBuilderExampleComponent implements AfterViewInit {
   protected readonly faTrashCan = faTrashCan;
 
   private readonly _statusTpl =
-    viewChild.required<TemplateRef<AtomCellContext<UserRow>>>('statusTpl');
-  private readonly _columns = signal<AtomTableColumn<UserRow>[]>([]);
+    viewChild<TemplateRef<AtomCellContext<UserRow>>>('statusTpl');
+  private readonly _columns = signal<AtomTableColumn<UserRow>[]>([...BUILDER_COLUMNS]);
   protected readonly columns = this._columns.asReadonly();
 
   private readonly paginator = viewChild.required<AtomPaginationComponent>('paginator');
@@ -209,6 +206,7 @@ export class FullTableBuilderExampleComponent implements AfterViewInit {
   constructor() {
     afterNextRender(() => {
       this.demo.dataSource.atomPaginator = this.paginator();
+      this._applyStatusCellTpl();
     });
 
     effect(() => {
@@ -217,32 +215,19 @@ export class FullTableBuilderExampleComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this._setColumns();
+    this._applyStatusCellTpl();
   }
 
-  private _setColumns(): void {
-    this._columns.set([
-      {
-        columnName: 'name',
-        columnLabel: 'Name',
-        accessor: 'name',
-        sortable: true,
-        defaultSort: 'asc',
-      },
-      { columnName: 'email', columnLabel: 'Email', accessor: 'email' },
-      { columnName: 'role', columnLabel: 'Role', accessor: 'role', sortable: true },
-      {
-        columnName: 'status',
-        columnLabel: 'Status',
-        accessor: 'status',
-        cellTpl: this._statusTpl(),
-      },
-      {
-        columnName: 'createdAt',
-        columnLabel: 'Created',
-        accessor: 'createdAt',
-        sortable: true,
-      },
-    ]);
+  private _applyStatusCellTpl(): void {
+    const statusTpl = this._statusTpl();
+    if (!statusTpl) {
+      return;
+    }
+
+    this._columns.set(
+      BUILDER_COLUMNS.map((column) =>
+        column.columnName === 'status' ? { ...column, cellTpl: statusTpl } : column,
+      ),
+    );
   }
 }
