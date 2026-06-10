@@ -14,6 +14,22 @@ export const appRoutes: Routes = [
         title: 'Atom Table Playground',
       },
       {
+        path: 'examples/full-table/manual',
+        loadComponent: () =>
+          import('./examples/full-table/manual/full-table-manual-example.component').then(
+            (m) => m.FullTableManualExampleComponent,
+          ),
+        title: 'Full Table — Manual',
+      },
+      {
+        path: 'examples/full-table/builder',
+        loadComponent: () =>
+          import('./examples/full-table/builder/full-table-builder-example.component').then(
+            (m) => m.FullTableBuilderExampleComponent,
+          ),
+        title: 'Full Table — Builder',
+      },
+      {
         path: 'examples/basic',
         loadComponent: () =>
           import('./examples/table/basic/basic-example.component').then(

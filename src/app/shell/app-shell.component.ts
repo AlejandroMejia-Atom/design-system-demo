@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
-import { TABLE_EXAMPLE_GROUPS } from '../examples/table/shared/table-examples.catalog';
+import { APP_EXAMPLE_GROUPS } from '../examples/app-example-groups';
 import { ThemeService } from './theme.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { ThemeService } from './theme.service';
   styleUrl: './app-shell.component.scss',
 })
 export class AppShellComponent {
-  protected readonly groups = TABLE_EXAMPLE_GROUPS;
+  protected readonly groups = APP_EXAMPLE_GROUPS;
   protected readonly theme = inject(ThemeService);
   protected readonly sidebarOpen = signal(false);
 
