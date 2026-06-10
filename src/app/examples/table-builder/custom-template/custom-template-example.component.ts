@@ -7,11 +7,12 @@ import {
   viewChild,
 } from '@angular/core';
 import {
-  ATOM_TABLE_BUILDER_IMPORTS,
   AtomTagComponent,
   type AtomCellContext,
   type AtomTableColumn,
 } from '@atomchat-io/ui-design-system';
+
+import { TABLE_BUILDER_DEMO_IMPORTS } from '../shared/table-builder.imports';
 
 import { ExamplePageComponent } from '../shared/example-page.component';
 import { PRODUCT_DATA, trackProductBy, type ProductRow } from '../shared/table-builder-demo.data';
@@ -21,7 +22,7 @@ const meta = tableBuilderExampleById('custom-template');
 
 @Component({
   selector: 'app-custom-template-example',
-  imports: [...ATOM_TABLE_BUILDER_IMPORTS, AtomTagComponent, ExamplePageComponent],
+  imports: [...TABLE_BUILDER_DEMO_IMPORTS, AtomTagComponent, ExamplePageComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-example-page

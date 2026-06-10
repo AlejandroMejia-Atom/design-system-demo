@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { ATOM_TABLE_BUILDER_IMPORTS } from '@atomchat-io/ui-design-system';
+import { TABLE_BUILDER_DEMO_IMPORTS } from '../shared/table-builder.imports';
 
 import { ExamplePageComponent } from '../shared/example-page.component';
 import {
@@ -14,7 +14,7 @@ const meta = tableBuilderExampleById('selection-multiple');
 
 @Component({
   selector: 'app-selection-multiple-example',
-  imports: [...ATOM_TABLE_BUILDER_IMPORTS, ExamplePageComponent],
+  imports: [...TABLE_BUILDER_DEMO_IMPORTS, ExamplePageComponent],
   template: `
     <app-example-page
       [title]="meta.title"

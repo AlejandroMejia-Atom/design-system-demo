@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import {
-  ATOM_TABLE_BUILDER_IMPORTS,
-  AtomEmptyStateComponent,
-} from '@atomchat-io/ui-design-system';
+import { AtomEmptyStateComponent } from '@atomchat-io/ui-design-system';
+
+import { TABLE_BUILDER_DEMO_IMPORTS } from '../shared/table-builder.imports';
 
 import { ExamplePageComponent } from '../shared/example-page.component';
 import { BASIC_COLUMNS, trackProductBy } from '../shared/table-builder-demo.data';
@@ -12,7 +11,7 @@ const meta = tableBuilderExampleById('empty-state');
 
 @Component({
   selector: 'app-empty-state-example',
-  imports: [...ATOM_TABLE_BUILDER_IMPORTS, AtomEmptyStateComponent, ExamplePageComponent],
+  imports: [...TABLE_BUILDER_DEMO_IMPORTS, AtomEmptyStateComponent, ExamplePageComponent],
   template: `
     <app-example-page
       [title]="meta.title"

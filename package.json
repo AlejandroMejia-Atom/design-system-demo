@@ -7,6 +7,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:fresh": "node scripts/clear-angular-cache.mjs && ng serve",
     "build": "ng build",
     "install:with-registry": "node scripts/install-with-registry.mjs",
     "vendor:pack": "node scripts/vendor-pack.mjs --pack",

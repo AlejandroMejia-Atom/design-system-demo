@@ -28,6 +28,12 @@ Interactive demos for **`atom-table-builder`** in `@atomchat-io/ui-design-system
    npm start
    ```
 
+   After upgrading vendored packages, clear Vite's prebundle cache if you see missing export errors:
+
+   ```bash
+   npm run start:fresh
+   ```
+
    Open [http://localhost:4200](http://localhost:4200). Each route includes a live demo, a **What to test** checklist, and copy-paste **Example code**.
 
 ## Import

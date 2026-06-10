@@ -1,9 +1,10 @@
 import { afterNextRender, Component, viewChild } from '@angular/core';
 import {
-  ATOM_TABLE_BUILDER_IMPORTS,
   AtomPaginationComponent,
   AtomTableDataSource,
 } from '@atomchat-io/ui-design-system';
+
+import { TABLE_BUILDER_DEMO_IMPORTS } from '../shared/table-builder.imports';
 
 import { ExamplePageComponent } from '../shared/example-page.component';
 import {
@@ -18,7 +19,7 @@ const meta = tableBuilderExampleById('pagination');
 
 @Component({
   selector: 'app-pagination-example',
-  imports: [...ATOM_TABLE_BUILDER_IMPORTS, AtomPaginationComponent, ExamplePageComponent],
+  imports: [...TABLE_BUILDER_DEMO_IMPORTS, AtomPaginationComponent, ExamplePageComponent],
   template: `
     <app-example-page
       [title]="meta.title"
