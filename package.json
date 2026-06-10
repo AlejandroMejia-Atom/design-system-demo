@@ -22,7 +22,7 @@
     "@angular/cdk": "20.2.14",
     "@angular/platform-browser": "20.3.16",
     "@angular/router": "20.3.16",
-    "@atomchat-io/ui-design-system": "file:vendor/atomchat-io-ui-design-system-0.5.1.tgz",
+    "@atomchat-io/ui-design-system": "file:vendor/atomchat-io-ui-design-system-0.6.0.tgz",
     "@atomchat-io/ui-tokens": "file:vendor/atomchat-io-ui-tokens-0.2.5.tgz",
     "@atomchat-io/ui-utils": "file:vendor/atomchat-io-ui-utils-0.2.0.tgz",
     "@fortawesome/angular-fontawesome": "^3.0.0",
