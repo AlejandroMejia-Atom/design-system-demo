@@ -1,6 +1,8 @@
-# Atom Table Playground
+# Atom Table Builder Playground
 
-Interactive demo app for every `atom-table` capability in `@atomchat-io/ui-design-system` v0.6.0.
+Interactive demos for **`atom-table-builder`** in `@atomchat-io/ui-design-system` v0.6.0.
+
+`atom-table-builder` is a declarative wrapper around `atom-table`. Pass a `columns` config and a `dataSource` instead of writing `atomColumnDef` / `*atomHeaderCellDef` / `*atomCellDef` for every column.
 
 ## Quick start
 
@@ -12,36 +14,13 @@ Interactive demo app for every `atom-table` capability in `@atomchat-io/ui-desig
 
    Fill in `ATOMCHAT_NPM_AUTH_TOKEN` and `FONTAWESOME_NPM_AUTH_TOKEN` in `.env`.
 
-2. Install dependencies (reads tokens from `.env`; only requires Node.js — no prior `npm install`):
+2. Install dependencies:
 
    ```bash
    npm run install:with-registry
    ```
 
-   **Manual alternative** — export the variables in your shell, then install:
-
-   ```bash
-   export ATOMCHAT_NPM_AUTH_TOKEN=your_token
-   export FONTAWESOME_NPM_AUTH_TOKEN=your_token
-   npm install
-   ```
-
-   PowerShell:
-
-   ```powershell
-   $env:ATOMCHAT_NPM_AUTH_TOKEN = "your_token"
-   $env:FONTAWESOME_NPM_AUTH_TOKEN = "your_token"
-   npm install
-   ```
-
-   **Install fails with `EIO` / "not found in cache"?** On local machines, clear npm's cache and retry:
-
-   ```bash
-   npm cache clean --force
-   npm run install:with-registry
-   ```
-
-   If you are on **StackBlitz**, see the section below — cache clean will not help.
+   On **StackBlitz**, open branch `feature/design-system-table-builder` — deps install from vendored tarballs.
 
 3. Start the dev server:
 
@@ -49,21 +28,152 @@ Interactive demo app for every `atom-table` capability in `@atomchat-io/ui-desig
    npm start
    ```
 
-   Open [http://localhost:4200](http://localhost:4200). Each example is a lazy-loaded route with a sidebar, theme toggle, and a “What to test” checklist.
+   Open [http://localhost:4200](http://localhost:4200). Each route includes a live demo, a **What to test** checklist, and copy-paste **Example code**.
+
+## Import
+
+```typescript
+import {
+  ATOM_TABLE_BUILDER_IMPORTS,
+  AtomTableBuilderComponent,
+  AtomTableColumn,
+  AtomTableDataSource,
+  AtomPaginationComponent,
+} from '@atomchat-io/ui-design-system';
+```
+
+`ATOM_TABLE_BUILDER_IMPORTS` bundles the builder component and its formatting pipes (`atomTableCellRender`, `atomTableAlign`, `atomTableCellValue`).
+
+## Minimal example
+
+```typescript
+@Component({
+  imports: [...ATOM_TABLE_BUILDER_IMPORTS],
+  template: `
+    <atom-table-builder
+      [columns]="columns"
+      [dataSource]="rows"
+      [atomTrackBy]="trackBy"
+    />
+  `,
+})
+export class ProductListComponent {
+  readonly rows = PRODUCT_DATA;
+  readonly trackBy = (_: number, row: ProductRow) => row.id;
+
+  readonly columns: AtomTableColumn<ProductRow>[] = [
+    { columnName: 'id', columnLabel: 'ID', accessor: 'id', columnType: 'number' },
+    { columnName: 'name', columnLabel: 'Name', accessor: 'name', sortable: true },
+    { columnName: 'amount', columnLabel: 'Price', accessor: 'amount', columnType: 'currency' },
+  ];
+}
+```
+
+## API reference
+
+### Inputs
+
+| Input | Type | Required | Description |
+| ----- | ---- | -------- | ----------- |
+| `columns` | `AtomTableColumn<T>[]` | yes | Column definitions (see below) |
+| `dataSource` | `T[]` \| `AtomTableDataSource<T>` | yes | Plain array or data source instance |
+| `atomTrackBy` | `TrackByFunction<T>` | yes | Stable row identity for DOM recycling |
+| `selectable` | `boolean` | no | Enables row selection (default `false`) |
+| `multiple` | `boolean` | no | Multiple selection + checkbox column (default `true`) |
+| `maxSelection` | `number` | no | Caps selected row count |
+
+### Outputs
+
+| Output | Payload | Description |
+| ------ | ------- | ----------- |
+| `rowClick` | `T` | Fires when a row is clicked |
+| `selectionChange` | `readonly T[]` | Current selection set |
+
+### `AtomTableColumn<T>`
+
+| Property | Description |
+| -------- | ----------- |
+| `columnName` | Unique id — forwarded to `[atomColumnDef]` |
+| `columnLabel` | Default header text |
+| `accessor` | `keyof T` or `(row: T) => unknown` |
+| `columnType` | `'text'` \| `'number'` \| `'currency'` \| `'date'` \| `'custom'` — drives formatter and alignment |
+| `sortable` | Adds `[atomSortHeader]` |
+| `defaultSort` | `'asc'` \| `'desc'` — initial sort (requires `sortable: true`) |
+| `cellTpl` | `TemplateRef<AtomCellContext<T>>` — overrides built-in formatter |
+| `headerTpl` | Custom header template |
+| `sticky` / `stickyEnd` | Pin column left / right |
+| `width` | CSS width hint (e.g. `'5rem'`, `'15%'`) |
+| `numberFormat` | DecimalPipe format (columnType `number`) |
+| `currencyCode` / `currencyDisplay` | CurrencyPipe options |
+| `dateFormat` | DatePipe format (columnType `date`) |
+
+### Cell template context
+
+When using `cellTpl`, the template receives:
+
+```html
+<ng-template #statusTpl let-row let-value="value" let-index="index" let-column="column">
+  <!-- value = accessor(row), row = full row object -->
+</ng-template>
+```
+
+Assign `cellTpl` after view init — `TemplateRef` is only available from `viewChild()` in `ngAfterViewInit`.
+
+### Pagination
+
+Use `AtomTableDataSource` and wire `atomPaginator` after render:
+
+```typescript
+readonly dataSource = new AtomTableDataSource(USER_DATA);
+private readonly paginator = viewChild.required<AtomPaginationComponent>('paginator');
+
+constructor() {
+  afterNextRender(() => {
+    this.dataSource.atomPaginator = this.paginator();
+  });
+}
+```
+
+```html
+<atom-table-builder [columns]="columns" [dataSource]="dataSource" [atomTrackBy]="trackBy" />
+<atom-pagination
+  #paginator
+  [length]="dataSource.filteredData.length"
+  [pageSize]="5"
+  [pageSizeOptions]="[5, 10, 25]"
+/>
+```
+
+### Empty state
+
+Project `atomNoDataRow` as content:
+
+```html
+<atom-table-builder [columns]="columns" [dataSource]="[]" [atomTrackBy]="trackBy">
+  <ng-template atomNoDataRow>
+    <tr class="atom-no-data-row">
+      <td [attr.colspan]="columns.length">
+        <atom-empty-state heading="No records" supportingText="Nothing to show" />
+      </td>
+    </tr>
+  </ng-template>
+</atom-table-builder>
+```
 
 ## Examples
 
-| Route                        | Feature                         |
-| ---------------------------- | ------------------------------- |
-| `/examples/basic`            | Static table                    |
-| `/examples/sort`             | Column sorting                  |
-| `/examples/pagination`       | Pagination + sort               |
-| `/examples/sticky-columns`   | Sticky left/right columns       |
-| `/examples/selectable`       | Row selection (multiple)        |
-| `/examples/checkboxes`       | Checkbox column + max selection |
-| `/examples/single-selection` | Single selection mode           |
-| `/examples/empty-state`      | No-data row + empty state       |
-| `/examples/cell-patterns`    | Auto cell alignment             |
+| Route | Feature |
+| ----- | ------- |
+| `/examples/basic` | Declarative columns + array dataSource |
+| `/examples/column-types` | number, currency, date formatters + defaultSort |
+| `/examples/sorting` | Sortable headers |
+| `/examples/pagination` | AtomTableDataSource + atom-pagination |
+| `/examples/selection-multiple` | Checkbox selection + selectionChange |
+| `/examples/selection-single` | Single selection mode |
+| `/examples/max-selection` | maxSelection cap |
+| `/examples/custom-template` | cellTpl with atomTag |
+| `/examples/sticky-columns` | sticky / stickyEnd columns |
+| `/examples/empty-state` | atomNoDataRow + atom-empty-state |
 
 ## Build
 
@@ -75,66 +185,24 @@ Output: `dist/demo/browser` (Netlify-ready).
 
 ## StackBlitz
 
-**`main` does not run on StackBlitz free / personal tiers** — private packages need registry tokens this environment cannot use.
-
-The demo depends on private npm packages:
-
-- `@atomchat-io/*` (restricted scope on registry.npmjs.org)
-- `@fortawesome/pro-*` (Font Awesome Pro registry at npm.fontawesome.com)
-
-StackBlitz WebContainers [do not support custom private registries](https://github.com/stackblitz/webcontainer-core/issues/21) unless you configure **StackBlitz Teams / Enterprise** integration. **`npm run install:with-registry` is for local development only.**
-
-### StackBlitz vendor branch (free tier)
-
-Vendored tarballs in git avoid private registries and Git LFS (StackBlitz cannot run `git lfs pull`).
-
-**Generate locally** (requires `.env` tokens once):
-
-```bash
-npm run vendor:pack           # vendor/*.tgz
-npm run vendor:stackblitz     # file: deps + lockfile + .npmrc without auth
+```
+https://stackblitz.com/github/AlejandroMejia-Atom/design-system-demo/tree/feature/design-system-table-builder?title=Atom%20Table%20Builder
 ```
 
-**Publish:**
+This branch inherits vendored packages from `stackblitz/vendor` (ui-design-system 0.6.0).
 
-```bash
-git checkout -b stackblitz/vendor
-git add -f vendor/*.tgz vendor/manifest.json package.json package-lock.json .npmrc
-git commit -m "chore(stackblitz): vendor private npm packages"
-git push -u origin stackblitz/vendor
-```
-
-Open that branch in StackBlitz — deps install from committed tarballs.
-
-**If install fails with `npm.fontawesome.com` / `ECONNRESET`:** the lockfile still points public `@fortawesome/*` packages at Font Awesome's private registry (from when `.npmrc` routed the whole scope there). Fix locally and recommit:
+**If install fails with `npm.fontawesome.com` / `ECONNRESET`:**
 
 ```bash
 npm run vendor:fix-lockfile
-git add package-lock.json .npmrc
-git commit -m "fix(stackblitz): resolve public @fortawesome from registry.npmjs.org"
 ```
 
-**Back to registry mode on `main`:**
-
-```bash
-npm run vendor:restore
-npm run install:with-registry
-```
-
-See `vendor/README.md` for details.
-
-### Other options
-
-| Goal              | Approach                                                                                                                                                                              |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Try the demo      | Clone locally → `cp example.env .env` → `npm run install:with-registry` → `npm start`                                                                                                 |
-| Share with others | Deploy `dist/demo/browser` to Netlify (see `netlify.toml`)                                                                                                                            |
-| StackBlitz in org | [Private NPM registry integration](https://developer.stackblitz.com/teams/private-npm-registry-integration) — open `main`; deps install when the project opens                        |
+See `vendor/README.md` for the vendor workflow.
 
 ## Stack
 
 - Angular 20 (standalone, zoneless)
-- `@atomchat-io/ui-design-system` + `@atomchat-io/ui-tokens`
+- `@atomchat-io/ui-design-system` 0.6.0 + `@atomchat-io/ui-tokens`
 - Font Awesome Pro (peer dependency for icons)
 
-Examples are ported from atom-ui Storybook stories in `libs/ui-design-system/src/lib/components/table/table.stories.ts`.
+Examples are ported from atom-ui Storybook stories in `libs/ui-design-system/src/lib/components/table-builder/atom-table-builder.stories.ts`.

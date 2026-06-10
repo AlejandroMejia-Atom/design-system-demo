@@ -11,79 +11,87 @@ export const appRoutes: Routes = [
       {
         path: '',
         component: HomeComponent,
-        title: 'Atom Table Playground',
+        title: 'Atom Table Builder Playground',
       },
       {
         path: 'examples/basic',
         loadComponent: () =>
-          import('./examples/table/basic/basic-example.component').then(
+          import('./examples/table-builder/basic/basic-example.component').then(
             (m) => m.BasicExampleComponent,
           ),
-        title: 'Basic Table',
+        title: 'Basic Table Builder',
       },
       {
-        path: 'examples/sort',
+        path: 'examples/column-types',
         loadComponent: () =>
-          import('./examples/table/sort/sort-example.component').then(
-            (m) => m.SortExampleComponent,
+          import('./examples/table-builder/column-types/column-types-example.component').then(
+            (m) => m.ColumnTypesExampleComponent,
           ),
-        title: 'Sortable Table',
+        title: 'Column Types',
+      },
+      {
+        path: 'examples/sorting',
+        loadComponent: () =>
+          import('./examples/table-builder/sorting/sorting-example.component').then(
+            (m) => m.SortingExampleComponent,
+          ),
+        title: 'Sorting',
       },
       {
         path: 'examples/pagination',
         loadComponent: () =>
-          import('./examples/table/pagination/pagination-example.component').then(
+          import('./examples/table-builder/pagination/pagination-example.component').then(
             (m) => m.PaginationExampleComponent,
           ),
-        title: 'Paginated Table',
+        title: 'Pagination',
+      },
+      {
+        path: 'examples/selection-multiple',
+        loadComponent: () =>
+          import('./examples/table-builder/selection-multiple/selection-multiple-example.component').then(
+            (m) => m.SelectionMultipleExampleComponent,
+          ),
+        title: 'Multiple Selection',
+      },
+      {
+        path: 'examples/selection-single',
+        loadComponent: () =>
+          import('./examples/table-builder/selection-single/selection-single-example.component').then(
+            (m) => m.SelectionSingleExampleComponent,
+          ),
+        title: 'Single Selection',
+      },
+      {
+        path: 'examples/max-selection',
+        loadComponent: () =>
+          import('./examples/table-builder/max-selection/max-selection-example.component').then(
+            (m) => m.MaxSelectionExampleComponent,
+          ),
+        title: 'Max Selection',
+      },
+      {
+        path: 'examples/custom-template',
+        loadComponent: () =>
+          import('./examples/table-builder/custom-template/custom-template-example.component').then(
+            (m) => m.CustomTemplateExampleComponent,
+          ),
+        title: 'Custom Cell Template',
       },
       {
         path: 'examples/sticky-columns',
         loadComponent: () =>
-          import('./examples/table/sticky-columns/sticky-columns-example.component').then(
+          import('./examples/table-builder/sticky-columns/sticky-columns-example.component').then(
             (m) => m.StickyColumnsExampleComponent,
           ),
         title: 'Sticky Columns',
       },
       {
-        path: 'examples/selectable',
-        loadComponent: () =>
-          import('./examples/table/selectable/selectable-example.component').then(
-            (m) => m.SelectableExampleComponent,
-          ),
-        title: 'Selectable Rows',
-      },
-      {
-        path: 'examples/checkboxes',
-        loadComponent: () =>
-          import('./examples/table/checkboxes/checkboxes-example.component').then(
-            (m) => m.CheckboxesExampleComponent,
-          ),
-        title: 'Selection Checkboxes',
-      },
-      {
-        path: 'examples/single-selection',
-        loadComponent: () =>
-          import('./examples/table/single-selection/single-selection-example.component').then(
-            (m) => m.SingleSelectionExampleComponent,
-          ),
-        title: 'Single Selection',
-      },
-      {
         path: 'examples/empty-state',
         loadComponent: () =>
-          import('./examples/table/empty-state/empty-state-example.component').then(
+          import('./examples/table-builder/empty-state/empty-state-example.component').then(
             (m) => m.EmptyStateExampleComponent,
           ),
         title: 'Empty State',
-      },
-      {
-        path: 'examples/cell-patterns',
-        loadComponent: () =>
-          import('./examples/table/cell-patterns/cell-patterns-example.component').then(
-            (m) => m.CellPatternsExampleComponent,
-          ),
-        title: 'Cell Patterns',
       },
     ],
   },
