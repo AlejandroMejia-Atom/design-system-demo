@@ -117,13 +117,13 @@ export const PAGINATOR_EXAMPLE_GROUPS: PaginatorExampleGroup[] = [
         id: 'data-source',
         title: 'Client-side data source',
         description:
-          'Wire pageChange to slice a local dataset and keep [length], [pageIndex], and [pageSize] in sync. For atom-table, assign AtomTableDataSource.atomPaginator instead.',
+          'AtomTableDataSource slices rows client-side when atomPaginator is assigned. Sorting applies to the full dataset before pagination.',
         route: '/examples/data-source',
         checklist: [
-          'List updates to show only the current page slice',
-          'pageChange payload includes pageIndex, previousPageIndex, pageSize, length',
-          'Changing page size resets to page 0 and emits pageChange',
-          'Shrinking length clamps the page index with a corrective pageChange',
+          'Table shows only the current page of rows',
+          'Sort a column — pagination reflects the sorted order',
+          'Change page size via the paginator control',
+          'pageChange emits pageIndex, previousPageIndex, pageSize, and length',
         ],
       },
     ],

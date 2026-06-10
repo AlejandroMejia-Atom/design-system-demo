@@ -47,7 +47,7 @@ Includes vendored private packages for StackBlitz.
 | `/examples/empty-dataset` | `length = 0` empty state |
 | `/examples/i18n-spanish` | `AtomPaginatorIntl` — Spanish labels |
 | `/examples/i18n-item-range` | Custom `getRangeLabel` — item range format |
-| `/examples/data-source` | Client-side slice via `pageChange` + `AtomTableDataSource` hint |
+| `/examples/data-source` | `AtomTableDataSource` + `atomPaginator` wiring |
 
 ## Build
 
