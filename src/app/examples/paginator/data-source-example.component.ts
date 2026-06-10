@@ -56,9 +56,11 @@ const meta = paginatorExampleById('data-source');
         (pageChange)="onPageChange($event)"
       />
 
-      <div class="example-page__panel">
-        <p class="example-page__panel-title">Last pageChange event</p>
-        <pre class="example-page__event-log">{{ lastEvent() | json }}</pre>
+      <div class="example-page__panel p-m bg-secondary mt-m">
+        <p class="example-page__panel-title typography-label-bold fg-secondary mb-s">
+          Last pageChange event
+        </p>
+        <pre class="example-page__event-log typography-caption-regular fg-primary">{{ lastEvent() | json }}</pre>
       </div>
     </app-example-page>
   `,

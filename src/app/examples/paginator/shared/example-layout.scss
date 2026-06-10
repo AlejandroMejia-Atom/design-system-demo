@@ -1,60 +1,35 @@
 .example-page {
-  max-width: 960px;
+  max-width: 60rem;
 }
 
-.example-page__title {
-  margin: 0 0 var(--spacing-xs);
-  font-size: var(--font-size-heading-m);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-heading-m);
-}
-
-.example-page__description {
-  margin: 0 0 var(--spacing-m);
-  color: var(--fg-secondary);
-  font-size: var(--font-size-body-m);
-  line-height: var(--line-height-body-m);
+.example-page__title,
+.example-page__description,
+.example-page__checklist-title {
+  margin: var(--spacing-none);
 }
 
 .example-page__checklist {
-  margin: 0 0 var(--spacing-l);
-  padding: var(--spacing-m);
-  border: 1px solid var(--border-primary);
+  border: var(--stroke-xs) solid var(--border-primary);
   border-radius: var(--radius-s);
-  background: var(--bg-secondary);
   list-style: none;
 }
 
-.example-page__checklist-title {
-  margin: 0 0 var(--spacing-s);
-  font-size: var(--font-size-label);
-  font-weight: var(--font-weight-semibold);
-  color: var(--fg-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.example-page__checklist li {
+.example-page__checklist-item {
   position: relative;
-  margin: 0;
-  padding: var(--spacing-xs) 0 var(--spacing-xs) var(--spacing-l);
-  color: var(--fg-primary);
-  font-size: var(--font-size-body-s);
-  line-height: var(--line-height-body-s);
+  margin: var(--spacing-none);
+  padding: var(--spacing-xs) var(--spacing-none) var(--spacing-xs) var(--spacing-l);
 }
 
-.example-page__checklist li::before {
+.example-page__checklist-item::before {
   content: '→';
   position: absolute;
-  left: 0;
+  left: var(--spacing-none);
   color: var(--fg-tertiary);
 }
 
 .example-page__demo {
-  padding: var(--spacing-m);
-  border: 1px solid var(--border-primary);
+  border: var(--stroke-xs) solid var(--border-primary);
   border-radius: var(--radius-m);
-  background: var(--bg-primary);
 }
 
 .example-page__demo atom-pagination {
@@ -69,25 +44,19 @@
 .example-page__panel {
   margin-top: var(--spacing-m);
   padding: var(--spacing-m);
-  border: 1px solid var(--border-primary);
+  border: var(--stroke-xs) solid var(--border-primary);
   border-radius: var(--radius-s);
   background: var(--bg-secondary);
 }
 
 .example-page__panel-title {
-  margin: 0 0 var(--spacing-s);
-  font-size: var(--font-size-label);
-  font-weight: var(--font-weight-semibold);
-  color: var(--fg-secondary);
-  text-transform: uppercase;
+  margin: var(--spacing-none) var(--spacing-none) var(--spacing-s);
   letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .example-page__event-log {
-  margin: 0;
-  font-family: var(--font-family-mono, ui-monospace, monospace);
-  font-size: var(--font-size-body-s);
-  line-height: var(--line-height-body-s);
+  margin: var(--spacing-none);
+  font-family: ui-monospace, monospace;
   white-space: pre-wrap;
-  color: var(--fg-primary);
 }
