@@ -15,6 +15,7 @@
     "vendor:fix-lockfile": "node scripts/vendor-pack.mjs --fix-lockfile"
   },
   "dependencies": {
+    "@angular/animations": "^20.3.16",
     "@angular/common": "20.3.16",
     "@angular/core": "20.3.16",
     "@angular/forms": "20.3.16",
