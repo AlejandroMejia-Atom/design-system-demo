@@ -1,6 +1,6 @@
 # Atom Table Builder Playground
 
-Interactive demos for **`atom-table-builder`** in `@atomchat-io/ui-design-system` v0.6.0.
+Interactive demos for **`atom-table-builder`** in `@atomchat-io/ui-design-system` v0.9.4.
 
 `atom-table-builder` is a declarative wrapper around `atom-table`. Pass a `columns` config and a `dataSource` instead of writing `atomColumnDef` / `*atomHeaderCellDef` / `*atomCellDef` for every column.
 
@@ -195,7 +195,7 @@ Output: `dist/demo/browser` (Netlify-ready).
 https://stackblitz.com/github/AlejandroMejia-Atom/design-system-demo/tree/feature/design-system-table-builder?title=Atom%20Table%20Builder
 ```
 
-This branch inherits vendored packages from `stackblitz/vendor` (ui-design-system 0.6.0).
+This branch inherits vendored packages from `stackblitz/vendor` (ui-design-system 0.9.4).
 
 **If install fails with `npm.fontawesome.com` / `ECONNRESET`:**
 
@@ -208,7 +208,7 @@ See `vendor/README.md` for the vendor workflow.
 ## Stack
 
 - Angular 20 (standalone, zoneless)
-- `@atomchat-io/ui-design-system` 0.6.0 + `@atomchat-io/ui-tokens`
+- `@atomchat-io/ui-design-system` 0.9.4 + `@atomchat-io/ui-tokens` 0.2.8 + `@atomchat-io/ui-utils` 0.3.0
 - Font Awesome Pro (peer dependency for icons)
 
 Examples are ported from atom-ui Storybook stories in `libs/ui-design-system/src/lib/components/table-builder/atom-table-builder.stories.ts`.

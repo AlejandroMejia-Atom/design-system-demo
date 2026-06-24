@@ -1,24 +1,24 @@
 {
-  "generatedAt": "2026-06-10T00:48:45.166Z",
+  "generatedAt": "2026-06-24T15:47:12.197Z",
   "mode": "stackblitz",
   "packages": [
     {
       "name": "@atomchat-io/ui-design-system",
-      "version": "0.6.0",
-      "range": "^0.6.0",
-      "tarball": "atomchat-io-ui-design-system-0.6.0.tgz"
+      "version": "0.9.4",
+      "range": "^0.9.4",
+      "tarball": "atomchat-io-ui-design-system-0.9.4.tgz"
     },
     {
       "name": "@atomchat-io/ui-tokens",
-      "version": "0.2.5",
-      "range": "^0.2.5",
-      "tarball": "atomchat-io-ui-tokens-0.2.5.tgz"
+      "version": "0.2.8",
+      "range": "^0.2.8",
+      "tarball": "atomchat-io-ui-tokens-0.2.8.tgz"
     },
     {
       "name": "@atomchat-io/ui-utils",
-      "version": "0.2.0",
-      "range": "^0.2.0",
-      "tarball": "atomchat-io-ui-utils-0.2.0.tgz"
+      "version": "0.3.0",
+      "range": "^0.3.0",
+      "tarball": "atomchat-io-ui-utils-0.3.0.tgz"
     },
     {
       "name": "@fortawesome/pro-regular-svg-icons",
@@ -34,23 +34,27 @@
     }
   ],
   "savedDependencies": {
+    "@angular/cdk": "20.2.14",
     "@angular/common": "20.3.16",
     "@angular/core": "20.3.16",
     "@angular/forms": "20.3.16",
     "@angular/material": "20.2.14",
-    "@angular/cdk": "20.2.14",
     "@angular/platform-browser": "20.3.16",
     "@angular/router": "20.3.16",
-    "@atomchat-io/ui-design-system": "^0.6.0",
-    "@atomchat-io/ui-tokens": "^0.2.5",
-    "@atomchat-io/ui-utils": "^0.2.0",
+    "@atomchat-io/ui-design-system": "^0.9.4",
+    "@atomchat-io/ui-tokens": "^0.2.8",
+    "@atomchat-io/ui-utils": "^0.3.0",
     "@fortawesome/angular-fontawesome": "^3.0.0",
     "@fortawesome/fontawesome-svg-core": "7.1.0",
     "@fortawesome/free-brands-svg-icons": "7.1.0",
-    "@fortawesome/pro-solid-svg-icons": "7.1.0",
     "@fortawesome/pro-regular-svg-icons": "7.1.0",
+    "@fortawesome/pro-solid-svg-icons": "7.1.0",
     "google-libphonenumber": ">=3.0.0",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.0"
+  },
+  "savedOverrides": {
+    "@fortawesome/pro-regular-svg-icons": "7.1.0",
+    "@fortawesome/pro-solid-svg-icons": "7.1.0"
   }
 }
