@@ -69,6 +69,62 @@ export const appRoutes: Routes = [
           ),
         title: 'Form Field',
       },
+      {
+        path: 'examples/form-inputs/text-field-form-control',
+        loadComponent: () =>
+          import('./examples/form-inputs/text-field-form-control/text-field-form-control-example.component').then(
+            (m) => m.TextFieldFormControlExampleComponent,
+          ),
+        title: 'Text Field + FormControl',
+      },
+      {
+        path: 'examples/form-inputs/search-input-form-control',
+        loadComponent: () =>
+          import('./examples/form-inputs/search-input-form-control/search-input-form-control-example.component').then(
+            (m) => m.SearchInputFormControlExampleComponent,
+          ),
+        title: 'Search Input + FormControl',
+      },
+      {
+        path: 'examples/form-inputs/text-area-form-control',
+        loadComponent: () =>
+          import('./examples/form-inputs/text-area-form-control/text-area-form-control-example.component').then(
+            (m) => m.TextAreaFormControlExampleComponent,
+          ),
+        title: 'Text Area + FormControl',
+      },
+      {
+        path: 'examples/form-inputs/select-input-form-control',
+        loadComponent: () =>
+          import('./examples/form-inputs/select-input-form-control/select-input-form-control-example.component').then(
+            (m) => m.SelectInputFormControlExampleComponent,
+          ),
+        title: 'Select Input + FormControl',
+      },
+      {
+        path: 'examples/form-inputs/date-picker-form-control',
+        loadComponent: () =>
+          import('./examples/form-inputs/date-picker-form-control/date-picker-form-control-example.component').then(
+            (m) => m.DatePickerFormControlExampleComponent,
+          ),
+        title: 'Date Picker + FormControl',
+      },
+      {
+        path: 'examples/form-inputs/time-picker-form-control',
+        loadComponent: () =>
+          import('./examples/form-inputs/time-picker-form-control/time-picker-form-control-example.component').then(
+            (m) => m.TimePickerFormControlExampleComponent,
+          ),
+        title: 'Time Picker + FormControl',
+      },
+      {
+        path: 'examples/form-inputs/form-group',
+        loadComponent: () =>
+          import('./examples/form-inputs/form-group/form-group-example.component').then(
+            (m) => m.FormGroupExampleComponent,
+          ),
+        title: 'FormGroup',
+      },
     ],
   },
   {
