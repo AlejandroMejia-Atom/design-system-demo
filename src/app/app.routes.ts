@@ -11,79 +11,63 @@ export const appRoutes: Routes = [
       {
         path: '',
         component: HomeComponent,
-        title: 'Atom Table Playground',
+        title: 'Atom Form Inputs Playground',
       },
       {
-        path: 'examples/basic',
+        path: 'examples/form-inputs/text-field',
         loadComponent: () =>
-          import('./examples/table/basic/basic-example.component').then(
-            (m) => m.BasicExampleComponent,
+          import('./examples/form-inputs/text-field/text-field-example.component').then(
+            (m) => m.TextFieldExampleComponent,
           ),
-        title: 'Basic Table',
+        title: 'Text Field',
       },
       {
-        path: 'examples/sort',
+        path: 'examples/form-inputs/search-input',
         loadComponent: () =>
-          import('./examples/table/sort/sort-example.component').then(
-            (m) => m.SortExampleComponent,
+          import('./examples/form-inputs/search-input/search-input-example.component').then(
+            (m) => m.SearchInputExampleComponent,
           ),
-        title: 'Sortable Table',
+        title: 'Search Input',
       },
       {
-        path: 'examples/pagination',
+        path: 'examples/form-inputs/text-area',
         loadComponent: () =>
-          import('./examples/table/pagination/pagination-example.component').then(
-            (m) => m.PaginationExampleComponent,
+          import('./examples/form-inputs/text-area/text-area-example.component').then(
+            (m) => m.TextAreaExampleComponent,
           ),
-        title: 'Paginated Table',
+        title: 'Text Area',
       },
       {
-        path: 'examples/sticky-columns',
+        path: 'examples/form-inputs/select-input',
         loadComponent: () =>
-          import('./examples/table/sticky-columns/sticky-columns-example.component').then(
-            (m) => m.StickyColumnsExampleComponent,
+          import('./examples/form-inputs/select-input/select-input-example.component').then(
+            (m) => m.SelectInputExampleComponent,
           ),
-        title: 'Sticky Columns',
+        title: 'Select Input',
       },
       {
-        path: 'examples/selectable',
+        path: 'examples/form-inputs/date-picker',
         loadComponent: () =>
-          import('./examples/table/selectable/selectable-example.component').then(
-            (m) => m.SelectableExampleComponent,
+          import('./examples/form-inputs/date-picker/date-picker-example.component').then(
+            (m) => m.DatePickerExampleComponent,
           ),
-        title: 'Selectable Rows',
+        title: 'Date Picker',
       },
       {
-        path: 'examples/checkboxes',
+        path: 'examples/form-inputs/time-picker',
         loadComponent: () =>
-          import('./examples/table/checkboxes/checkboxes-example.component').then(
-            (m) => m.CheckboxesExampleComponent,
+          import('./examples/form-inputs/time-picker/time-picker-example.component').then(
+            (m) => m.TimePickerExampleComponent,
           ),
-        title: 'Selection Checkboxes',
+        title: 'Time Picker',
       },
       {
-        path: 'examples/single-selection',
+        path: 'examples/form-inputs/form-field',
         loadComponent: () =>
-          import('./examples/table/single-selection/single-selection-example.component').then(
-            (m) => m.SingleSelectionExampleComponent,
+          import('./examples/form-inputs/form-field/form-field-example.component').then(
+            (m) => m.FormFieldExampleComponent,
           ),
-        title: 'Single Selection',
-      },
-      {
-        path: 'examples/empty-state',
-        loadComponent: () =>
-          import('./examples/table/empty-state/empty-state-example.component').then(
-            (m) => m.EmptyStateExampleComponent,
-          ),
-        title: 'Empty State',
-      },
-      {
-        path: 'examples/cell-patterns',
-        loadComponent: () =>
-          import('./examples/table/cell-patterns/cell-patterns-example.component').then(
-            (m) => m.CellPatternsExampleComponent,
-          ),
-        title: 'Cell Patterns',
+        title: 'Form Field',
       },
     ],
   },
