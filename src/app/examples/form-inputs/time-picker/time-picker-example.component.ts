@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AtomTimePickerComponent,
@@ -7,7 +7,11 @@ import {
 } from '@atomchat-io/ui-design-system';
 
 import { ExamplePageComponent } from '../../table/shared/example-page.component';
-import { TIME_PICKER_SIZES } from '../shared/form-input-demo.data';
+import {
+  TIME_FORMAT_OPTIONS,
+  TIME_INTERVAL_OPTIONS,
+  TIME_PICKER_SIZES,
+} from '../shared/form-input-demo.data';
 import { FormInputDemoToggleComponent } from '../shared/form-input-demo-toggle.component';
 import { FormInputSegmentComponent } from '../shared/form-input-segment.component';
 import { formInputExampleById } from '../shared/form-inputs-examples.catalog';
@@ -46,6 +50,14 @@ function timeToday(hours: number, minutes: number): Date {
             />
           </div>
           <div class="form-input-demo__control-group">
+            <span class="typography-caption-regular">Interval</span>
+            <app-form-input-segment
+              [options]="intervals"
+              [value]="interval()"
+              (valueChange)="interval.set($event)"
+            />
+          </div>
+          <div class="form-input-demo__control-group">
             <span class="typography-caption-regular">Size</span>
             <app-form-input-segment
               [options]="sizes"
@@ -53,6 +65,11 @@ function timeToday(hours: number, minutes: number): Date {
               (valueChange)="onSizeChange($event)"
             />
           </div>
+          <app-form-input-demo-toggle
+            label="Office hours min/max"
+            [checked]="bounded()"
+            (checkedChange)="bounded.set($event)"
+          />
           <app-form-input-demo-toggle
             label="Disabled"
             [checked]="disabled()"
@@ -65,13 +82,16 @@ function timeToday(hours: number, minutes: number): Date {
           [formControl]="meetingTime"
           [size]="size()"
           [timeFormat]="timeFormat()"
-          interval="30m"
-          [min]="minTime"
-          [max]="maxTime"
+          [interval]="interval()"
+          [min]="activeMin"
+          [max]="activeMax"
         />
 
         <p class="form-input-demo__readout typography-caption-regular">
           Selected: <code>{{ formatTime(meetingTime.value) }}</code>
+        </p>
+        <p class="form-input-demo__readout typography-caption-regular">
+          Active API: <code>{{ apiSummary() }}</code>
         </p>
       </div>
     </app-example-page>
@@ -80,14 +100,36 @@ function timeToday(hours: number, minutes: number): Date {
 })
 export class TimePickerExampleComponent {
   protected readonly meta = meta;
-  protected readonly formats = ['12h', '24h'] as const;
+  protected readonly formats = TIME_FORMAT_OPTIONS;
+  protected readonly intervals = TIME_INTERVAL_OPTIONS;
   protected readonly sizes = TIME_PICKER_SIZES;
   protected readonly timeFormat = signal<AtomTimeFormat>('12h');
+  protected readonly interval = signal<string>('30m');
   protected readonly size = signal<AtomFormFieldSize>('m');
+  protected readonly bounded = signal(true);
   protected readonly disabled = signal(false);
-  protected readonly minTime = timeToday(8, 0);
-  protected readonly maxTime = timeToday(20, 0);
+  protected readonly officeMin = timeToday(8, 0);
+  protected readonly officeMax = timeToday(20, 0);
   protected readonly meetingTime = new FormControl<Date | null>(timeToday(14, 30));
+
+  protected get activeMin(): Date | null {
+    return this.bounded() ? this.officeMin : null;
+  }
+
+  protected get activeMax(): Date | null {
+    return this.bounded() ? this.officeMax : null;
+  }
+
+  protected readonly apiSummary = computed(
+    () =>
+      [
+        `timeFormat="${this.timeFormat()}"`,
+        `interval="${this.interval()}"`,
+        `size="${this.size()}"`,
+        `bounded=${this.bounded()}`,
+        `disabled=${this.disabled()}`,
+      ].join(' · '),
+  );
 
   onFormatChange(value: string): void {
     this.timeFormat.set(value as AtomTimeFormat);

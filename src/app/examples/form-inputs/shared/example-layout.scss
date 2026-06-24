@@ -79,6 +79,10 @@
   max-width: 420px;
 }
 
+.form-field-demo .form-input-demo__field--date {
+  min-height: auto;
+}
+
 .form-field-demo__toolbar {
   width: 100%;
 }
@@ -136,4 +140,20 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-s);
+}
+
+.form-control-demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-l);
+  max-width: 420px;
+}
+
+.form-control-demo__inspect {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-s);
+  padding-top: var(--spacing-s);
+  border-top: var(--stroke-xs) solid var(--border-primary);
 }

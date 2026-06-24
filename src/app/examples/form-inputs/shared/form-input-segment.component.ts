@@ -1,7 +1,8 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import {
   AtomSegmentComponent,
   AtomSegmentControlComponent,
+  type AtomSegmentSize,
 } from '@atomchat-io/ui-design-system';
 
 @Component({
@@ -9,7 +10,7 @@ import {
   imports: [AtomSegmentControlComponent, AtomSegmentComponent],
   template: `
     <atom-segment-control
-      size="xs"
+      [size]="segmentSize()"
       [value]="value()"
       (valueChange)="onValueChange($event)"
     >
@@ -23,6 +24,11 @@ export class FormInputSegmentComponent {
   readonly options = input.required<readonly string[]>();
   readonly value = input.required<string>();
   readonly valueChange = output<string>();
+
+  /** DS warns when size='xs' is used with 5+ segments — bump to 's' automatically. */
+  protected readonly segmentSize = computed<AtomSegmentSize>(() =>
+    this.options().length >= 5 ? 's' : 'xs',
+  );
 
   onValueChange(next: string | null): void {
     if (next && this.options().includes(next)) {
