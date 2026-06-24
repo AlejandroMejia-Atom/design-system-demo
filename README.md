@@ -1,6 +1,6 @@
 # Atom Table Playground
 
-Interactive demo app for every `atom-table` capability in `@atomchat-io/ui-design-system` v0.6.0.
+Interactive demo app for every `atom-table` capability in `@atomchat-io/ui-design-system` v0.9.4.
 
 ## Quick start
 
