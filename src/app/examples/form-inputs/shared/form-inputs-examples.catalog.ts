@@ -27,13 +27,13 @@ export const FORM_INPUT_EXAMPLE_GROUPS: FormInputExampleGroup[] = [
         id: 'text-field',
         title: 'Text field',
         description:
-          'Visual playground for atom-text-field without atom-form-field. See Text field + FormControl for validators and status readout.',
+          'Visual playground for atom-text-field without atom-form-field. See FormControl for reactive binding and status readout.',
         route: '/examples/form-inputs/text-field',
         checklist: [
-          'Type in the email field — border and focus ring follow DS states',
-          'Switch sizes with atom-segment-control (xs / s / m / l / xl)',
-          'Leading @ and trailing .com enhancers render inside the field shell',
-          'Toggle Disabled with atom-toggle to preview the disabled shell',
+          'Switch type (text / email / password / url) and size from the toolbar',
+          'Toggle leading @ and trailing .com enhancers',
+          'Active API readout reflects the current binding',
+          'Toggle Disabled to preview the disabled shell',
         ],
       },
       {
@@ -43,9 +43,10 @@ export const FORM_INPUT_EXAMPLE_GROUPS: FormInputExampleGroup[] = [
           'atom-search-input composes atom-text-field with search icon, clear button, and optional expandable mode.',
         route: '/examples/form-inputs/search-input',
         checklist: [
-          'Default mode shows search icon, input, and clear button when filled',
+          'Switch debounce (0 / 200 / 400 / 800 ms) and watch the (search) event',
+          'Toggle Expandable to compare collapsed vs expanded modes',
           'Switch sizes with atom-segment-control (s / m / l)',
-          'Toggle Expandable and Disabled with atom-toggle',
+          'Active API readout shows the current prop bindings',
         ],
       },
       {
@@ -55,9 +56,10 @@ export const FORM_INPUT_EXAMPLE_GROUPS: FormInputExampleGroup[] = [
           'Multi-line input via textarea atomTextFieldInput inside atom-text-field — no form-field wrapper.',
         route: '/examples/form-inputs/text-area',
         checklist: [
-          'Textarea auto-resizes as you type (within row limits)',
-          'Character counter appears when maxlength is set on the textarea',
+          'Switch maxlength and counterMode (char / word) from the toolbar',
           'Switch sizes with atom-segment-control (m / xl)',
+          'Character counter updates as you type',
+          'Active API readout reflects the current binding',
         ],
       },
       {
@@ -67,11 +69,10 @@ export const FORM_INPUT_EXAMPLE_GROUPS: FormInputExampleGroup[] = [
           'atom-select-input with atom-list-item options — single select, searchable, without atom-form-field.',
         route: '/examples/form-inputs/select-input',
         checklist: [
-          'Open the panel and pick a language',
+          'Toggle searchable, multiple, grouped, loading, and hideClearFooter',
           'Switch sizes with atom-segment-control (xs / s / m / l / xl)',
-          'Search filters options when searchable is enabled',
-          'Selected value displays in the trigger',
-          'Clear resets the selection',
+          'Multiple mode switches the FormControl value to string[]',
+          'Active API readout shows all current prop bindings',
         ],
       },
       {
@@ -80,10 +81,10 @@ export const FORM_INPUT_EXAMPLE_GROUPS: FormInputExampleGroup[] = [
         description: 'atom-date-picker as a standalone control — calendar panel, mask input, no form-field wrapper.',
         route: '/examples/form-inputs/date-picker',
         checklist: [
-          'Click the calendar icon or type a date in the masked input',
-          'Switch sizes with atom-segment-control (xs / s / m / l / xl)',
-          'Calendar panel opens with Apply / Cancel actions',
-          'Min/max bounds constrain selectable dates',
+          'Switch mode between single date and date range pickers',
+          'Toggle doubleCalendar in range mode',
+          'Bounds readout shows min/max — one calendar month before and after today',
+          'Toggle min/max bounds off to allow any date',
         ],
       },
       {
@@ -92,9 +93,10 @@ export const FORM_INPUT_EXAMPLE_GROUPS: FormInputExampleGroup[] = [
         description: 'atom-time-picker as a standalone control — preset intervals and 12h/24h formats.',
         route: '/examples/form-inputs/time-picker',
         checklist: [
-          'Open the panel and pick a preset time',
+          'Switch timeFormat (12h / 24h) and interval (15m / 30m / 60m)',
+          'Toggle office-hours min/max bounds',
           'Switch sizes with atom-segment-control (xs / s / m / l / xl)',
-          'Switch between 12h and 24h formats with atom-segment-control',
+          'Active API readout reflects the current binding',
         ],
       },
     ],
@@ -103,75 +105,16 @@ export const FORM_INPUT_EXAMPLE_GROUPS: FormInputExampleGroup[] = [
     label: 'Reactive forms (FormControl)',
     examples: [
       {
-        id: 'text-field-form-control',
-        title: 'Text field + FormControl',
+        id: 'form-control',
+        title: 'FormControl binding',
         description:
-          'Reactive FormControl on atomTextFieldInput inside atom-form-field — required, pattern validators, and live control status.',
-        route: '/examples/form-inputs/text-field-form-control',
+          'All input types bound with [formControl] — validators, value sync, and a shared status readout. Component APIs are explored in the standalone playgrounds.',
+        route: '/examples/form-inputs/form-control',
         checklist: [
-          'Clear the field and click Mark touched — error message appears',
-          'Patch sample sets a valid username on the FormControl',
-          'Readout shows value, status, touched/dirty, and validation errors',
-        ],
-      },
-      {
-        id: 'search-input-form-control',
-        title: 'Search input + FormControl',
-        description:
-          'atom-search-input bound with [formControl] and minLength validation — no atom-form-field wrapper.',
-        route: '/examples/form-inputs/search-input-form-control',
-        checklist: [
-          'Type fewer than 3 characters — FormControl stays invalid',
-          'Debounced value still syncs to the bound FormControl',
-          'Reset clears both the input and validation state',
-        ],
-      },
-      {
-        id: 'text-area-form-control',
-        title: 'Text area + FormControl',
-        description:
-          'Textarea with [formControl], maxlength, and minLength validators composed with atom-form-field counter.',
-        route: '/examples/form-inputs/text-area-form-control',
-        checklist: [
-          'Character counter tracks FormControl value length',
-          'Mark touched with empty value surfaces required error',
-          'Patch sample fills a valid release note',
-        ],
-      },
-      {
-        id: 'select-input-form-control',
-        title: 'Select input + FormControl',
-        description:
-          'atom-select-input as a ControlValueAccessor — [formControl] with required validator and label resolution in readout.',
-        route: '/examples/form-inputs/select-input-form-control',
-        checklist: [
-          'Open panel and pick a language — FormControl value updates',
-          'Clear selection and mark touched — required error shows',
-          'Readout resolves the locale code to a human label',
-        ],
-      },
-      {
-        id: 'date-picker-form-control',
-        title: 'Date picker + FormControl',
-        description:
-          'atom-date-picker with [formControl] — Date | null value, required validator, and min/max bounds.',
-        route: '/examples/form-inputs/date-picker-form-control',
-        checklist: [
-          'Pick a date from the calendar — FormControl commits Date | null',
-          'Type an out-of-range date — parse/min/max errors on the control',
-          'Patch sample sets a date two weeks from today',
-        ],
-      },
-      {
-        id: 'time-picker-form-control',
-        title: 'Time picker + FormControl',
-        description:
-          'atom-time-picker with [formControl] — preset and typed commits sync to a Date | null FormControl.',
-        route: '/examples/form-inputs/time-picker-form-control',
-        checklist: [
-          'Pick a preset — FormControl updates on commit',
-          'Type a time outside office hours — min/max validation fails',
-          'Readout formats the time portion of the stored Date',
+          'Each control uses [formControl] with its own validators',
+          'Switch the inspect segment to read status for search, email, bio, language, date, or time',
+          'Mark touched / Mark dirty / Reset / Patch sample on the active FormControl',
+          'Compare with FormGroup for formControlName and with standalone pages for component APIs',
         ],
       },
     ],
