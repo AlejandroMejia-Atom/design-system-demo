@@ -1,0 +1,89 @@
+.example-page {
+  max-width: 60rem;
+}
+
+.example-page__title,
+.example-page__description,
+.example-page__checklist-title {
+  margin: var(--spacing-none);
+}
+
+.example-page__checklist {
+  border: var(--stroke-xs) solid var(--border-primary);
+  border-radius: var(--radius-s);
+  list-style: none;
+}
+
+.example-page__checklist-item {
+  position: relative;
+  margin: var(--spacing-none);
+  padding: var(--spacing-xs) var(--spacing-none) var(--spacing-xs) var(--spacing-l);
+}
+
+.example-page__checklist-item::before {
+  content: '→';
+  position: absolute;
+  left: var(--spacing-none);
+  color: var(--fg-tertiary);
+}
+
+.example-page__demo {
+  border: var(--stroke-xs) solid var(--border-primary);
+  border-radius: var(--radius-m);
+}
+
+.form-input-demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-l);
+}
+
+.form-input-demo__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-m);
+  color: var(--fg-secondary);
+}
+
+.form-input-demo__control-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-s);
+}
+
+.form-input-demo__field {
+  width: min(100%, 360px);
+}
+
+.form-input-demo__field--date {
+  width: min(100%, 280px);
+  min-height: 28rem;
+}
+
+.form-input-demo__readout {
+  margin: var(--spacing-none);
+  font-size: var(--font-size-caption);
+  color: var(--fg-secondary);
+}
+
+.form-input-demo__readout code {
+  font-size: inherit;
+}
+
+.form-field-demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-l);
+  max-width: 420px;
+}
+
+.form-field-demo__toolbar {
+  width: 100%;
+}
+
+.form-field-demo__actions {
+  display: flex;
+  gap: var(--spacing-s);
+}
