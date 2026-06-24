@@ -49,28 +49,40 @@ export const FULL_TABLE_EXAMPLE_GROUPS: FullTableExampleGroup[] = [
     label: 'Empty states',
     examples: [
       {
-        id: 'empty-state-template',
-        title: 'Custom templates',
-        description:
-          'Replace default empty, no-data, and error fallbacks by projecting ng-template overrides with atomDataLayoutState.',
-        route: '/examples/full-table/empty-state-template',
-        checklist: [
-          'Switch Empty / No data / Error with the segment control',
-          'Each state renders the projected ng-template instead of atom-empty-state defaults',
-          'Toolbar and pagination stay visible in every state',
-          'Templates can include custom copy, emoji, and action buttons',
-        ],
-      },
-      {
         id: 'empty-state-intl',
-        title: 'AtomDataLayoutIntl',
+        title: 'DS empty state (intl)',
         description:
-          'Customize fallback copy and icons by providing a subclass of AtomDataLayoutIntl at component scope — same pattern as AtomPaginatorIntl.',
+          'Default atom-empty-state fallbacks driven by AtomDataLayoutIntl — customize copy and icons without projecting templates.',
         route: '/examples/full-table/empty-state-intl',
         checklist: [
           'Spanish labels come from SpanishDataLayoutIntl (provide AtomDataLayoutIntl)',
-          'Switch states — each shows atom-empty-state with intl-driven title, description, and icon',
-          'No ng-template overrides; only the intl token changes the fallback UI',
+          'Switch states — each renders atom-empty-state with intl-driven title, description, and icon',
+          'No ng-template overrides; the layout uses the built-in DS empty state',
+        ],
+      },
+      {
+        id: 'empty-state-ds-template',
+        title: 'DS empty state (templates)',
+        description:
+          'Project atom-empty-state inside ng-template atomDataLayoutState overrides — use size, inputs, and action slots while keeping DS anatomy.',
+        route: '/examples/full-table/empty-state-ds-template',
+        checklist: [
+          'Empty uses size="medium" with actionLabel fallback',
+          'No data uses size="small" with resultText for the search keyword',
+          'Error uses a projected atomEmptyStateAction button on atom-empty-state',
+        ],
+      },
+      {
+        id: 'empty-state-custom',
+        title: 'Custom empty states',
+        description:
+          'Replace fallbacks with fully custom markup in ng-template atomDataLayoutState — no atom-empty-state component.',
+        route: '/examples/full-table/empty-state-custom',
+        checklist: [
+          'Switch Empty / No data / Error with the segment control',
+          'Each state renders bespoke HTML instead of atom-empty-state',
+          'Toolbar and pagination stay visible in every state',
+          'Use for illustrations, emoji, or layouts outside the DS empty-state anatomy',
         ],
       },
     ],

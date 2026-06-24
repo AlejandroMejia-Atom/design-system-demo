@@ -1,10 +1,17 @@
 import { Component, signal } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faPlus, faRotateRight } from '@fortawesome/pro-solid-svg-icons';
+import {
+  faInbox,
+  faMagnifyingGlass,
+  faPlus,
+  faTriangleExclamation,
+} from '@fortawesome/pro-regular-svg-icons';
 import {
   ATOM_DATA_LAYOUT_IMPORTS,
   ATOM_TABLE_IMPORTS,
   AtomButtonComponent,
+  AtomEmptyStateActionDirective,
+  AtomEmptyStateComponent,
   AtomPaginationComponent,
   AtomSearchInputComponent,
   AtomSegmentComponent,
@@ -20,12 +27,12 @@ import {
   trackLayoutStateRow,
 } from '../shared/data-layout-state-demo.data';
 
-const meta = ALL_FULL_TABLE_EXAMPLES.find((e) => e.id === 'empty-state-template')!;
+const meta = ALL_FULL_TABLE_EXAMPLES.find((e) => e.id === 'empty-state-ds-template')!;
 
 type LayoutBodyState = 'empty' | 'noData' | 'error';
 
 @Component({
-  selector: 'app-empty-state-template-example',
+  selector: 'app-empty-state-ds-template-example',
   imports: [
     ...ATOM_DATA_LAYOUT_IMPORTS,
     ...ATOM_TABLE_IMPORTS,
@@ -33,6 +40,8 @@ type LayoutBodyState = 'empty' | 'noData' | 'error';
     AtomToolbarComponent,
     AtomSearchInputComponent,
     AtomButtonComponent,
+    AtomEmptyStateComponent,
+    AtomEmptyStateActionDirective,
     AtomSegmentControlComponent,
     AtomSegmentComponent,
     FaIconComponent,
@@ -88,46 +97,41 @@ type LayoutBodyState = 'empty' | 'noData' | 'error';
           <atom-pagination [length]="0" [pageSize]="10" />
 
           <ng-template atomDataLayoutState="empty">
-            <div class="data-layout-custom-state">
-              <span class="data-layout-custom-state__emoji" aria-hidden="true">📭</span>
-              <p class="data-layout-custom-state__title typography-heading-bold fg-primary">
-                Your team list is empty
-              </p>
-              <p class="data-layout-custom-state__text typography-caption-regular fg-secondary">
-                Projected via <code>ng-template atomDataLayoutState="empty"</code>
-              </p>
-              <button atom-button="primary" type="button">
-                <fa-icon [icon]="faPlus" atom-button-icon />
-                Add first user
-              </button>
+            <div class="atom-data-layout__state-container">
+              <atom-empty-state
+                size="medium"
+                [icon]="faInbox"
+                heading="No users yet"
+                supportingText="Add the first team member to get started."
+                actionLabel="Add user"
+              />
             </div>
           </ng-template>
 
           <ng-template atomDataLayoutState="noData">
-            <div class="data-layout-custom-state">
-              <span class="data-layout-custom-state__emoji" aria-hidden="true">🔍</span>
-              <p class="data-layout-custom-state__title typography-heading-bold fg-primary">
-                No matches for your filters
-              </p>
-              <p class="data-layout-custom-state__text typography-caption-regular fg-secondary">
-                Override with <code>atomDataLayoutState="noData"</code> — try another search term.
-              </p>
+            <div class="atom-data-layout__state-container">
+              <atom-empty-state
+                size="small"
+                [icon]="faMagnifyingGlass"
+                heading="No results"
+                supportingText="Try adjusting your search or filters."
+                resultText="“design”"
+              />
             </div>
           </ng-template>
 
           <ng-template atomDataLayoutState="error">
-            <div class="data-layout-custom-state">
-              <span class="data-layout-custom-state__emoji" aria-hidden="true">⚠️</span>
-              <p class="data-layout-custom-state__title typography-heading-bold fg-primary">
-                Could not load users
-              </p>
-              <p class="data-layout-custom-state__text typography-caption-regular fg-secondary">
-                Override with <code>atomDataLayoutState="error"</code>
-              </p>
-              <button atom-button="secondary" type="button">
-                <fa-icon [icon]="faRotateRight" atom-button-icon />
-                Retry
-              </button>
+            <div class="atom-data-layout__state-container">
+              <atom-empty-state
+                size="medium"
+                [icon]="faTriangleExclamation"
+                heading="Failed to load users"
+                supportingText="Check your connection and try again."
+              >
+                <button atom-button="secondary" atomEmptyStateAction type="button">
+                  Retry
+                </button>
+              </atom-empty-state>
             </div>
           </ng-template>
         </atom-data-layout>
@@ -136,13 +140,15 @@ type LayoutBodyState = 'empty' | 'noData' | 'error';
   `,
   styleUrls: ['../../table/shared/example-layout.scss', '../shared/full-table-layout.scss'],
 })
-export class EmptyStateTemplateExampleComponent {
+export class EmptyStateDsTemplateExampleComponent {
   protected readonly meta = meta;
   protected readonly dataSource = layoutStateEmptyDataSource;
   protected readonly trackBy = trackLayoutStateRow;
   protected readonly columns = [...LAYOUT_STATE_DEMO_COLUMNS];
   protected readonly faPlus = faPlus;
-  protected readonly faRotateRight = faRotateRight;
+  protected readonly faInbox = faInbox;
+  protected readonly faMagnifyingGlass = faMagnifyingGlass;
+  protected readonly faTriangleExclamation = faTriangleExclamation;
 
   readonly previewState = signal<LayoutBodyState>('empty');
 
