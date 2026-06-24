@@ -45,6 +45,36 @@ export const FULL_TABLE_EXAMPLE_GROUPS: FullTableExampleGroup[] = [
       },
     ],
   },
+  {
+    label: 'Empty states',
+    examples: [
+      {
+        id: 'empty-state-template',
+        title: 'Custom templates',
+        description:
+          'Replace default empty, no-data, and error fallbacks by projecting ng-template overrides with atomDataLayoutState.',
+        route: '/examples/full-table/empty-state-template',
+        checklist: [
+          'Switch Empty / No data / Error with the segment control',
+          'Each state renders the projected ng-template instead of atom-empty-state defaults',
+          'Toolbar and pagination stay visible in every state',
+          'Templates can include custom copy, emoji, and action buttons',
+        ],
+      },
+      {
+        id: 'empty-state-intl',
+        title: 'AtomDataLayoutIntl',
+        description:
+          'Customize fallback copy and icons by providing a subclass of AtomDataLayoutIntl at component scope — same pattern as AtomPaginatorIntl.',
+        route: '/examples/full-table/empty-state-intl',
+        checklist: [
+          'Spanish labels come from SpanishDataLayoutIntl (provide AtomDataLayoutIntl)',
+          'Switch states — each shows atom-empty-state with intl-driven title, description, and icon',
+          'No ng-template overrides; only the intl token changes the fallback UI',
+        ],
+      },
+    ],
+  },
 ];
 
 export const ALL_FULL_TABLE_EXAMPLES = FULL_TABLE_EXAMPLE_GROUPS.flatMap(

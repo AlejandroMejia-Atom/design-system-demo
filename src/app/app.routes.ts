@@ -30,6 +30,22 @@ export const appRoutes: Routes = [
         title: 'Full Table — Builder',
       },
       {
+        path: 'examples/full-table/empty-state-template',
+        loadComponent: () =>
+          import('./examples/full-table/empty-state-template/empty-state-template-example.component').then(
+            (m) => m.EmptyStateTemplateExampleComponent,
+          ),
+        title: 'Empty State — Templates',
+      },
+      {
+        path: 'examples/full-table/empty-state-intl',
+        loadComponent: () =>
+          import('./examples/full-table/empty-state-intl/empty-state-intl-example.component').then(
+            (m) => m.EmptyStateIntlExampleComponent,
+          ),
+        title: 'Empty State — Intl',
+      },
+      {
         path: 'examples/basic',
         loadComponent: () =>
           import('./examples/table/basic/basic-example.component').then(
