@@ -1,6 +1,6 @@
 # Atom Paginator Playground
 
-Interactive demos for the full `atom-pagination` API in `@atomchat-io/ui-design-system` v0.5.0.
+Interactive demos for the full `atom-pagination` API in `@atomchat-io/ui-design-system` v0.9.4.
 Includes vendored private packages for StackBlitz.
 
 ## Quick start
