@@ -11,79 +11,79 @@ export const appRoutes: Routes = [
       {
         path: '',
         component: HomeComponent,
-        title: 'Atom Table Playground',
+        title: 'Atom Filter Playground',
       },
       {
-        path: 'examples/basic',
+        path: 'examples/filters/filter-trigger',
         loadComponent: () =>
-          import('./examples/table/basic/basic-example.component').then(
-            (m) => m.BasicExampleComponent,
+          import('./examples/filters/filter-trigger/filter-trigger-example.component').then(
+            (m) => m.FilterTriggerExampleComponent,
           ),
-        title: 'Basic Table',
+        title: 'Filter Trigger',
       },
       {
-        path: 'examples/sort',
+        path: 'examples/filters/filter-chip',
         loadComponent: () =>
-          import('./examples/table/sort/sort-example.component').then(
-            (m) => m.SortExampleComponent,
+          import('./examples/filters/filter-chip/filter-chip-example.component').then(
+            (m) => m.FilterChipExampleComponent,
           ),
-        title: 'Sortable Table',
+        title: 'Filter Chip',
       },
       {
-        path: 'examples/pagination',
+        path: 'examples/filters/filter-row',
         loadComponent: () =>
-          import('./examples/table/pagination/pagination-example.component').then(
-            (m) => m.PaginationExampleComponent,
+          import('./examples/filters/filter-row/filter-row-example.component').then(
+            (m) => m.FilterRowExampleComponent,
           ),
-        title: 'Paginated Table',
+        title: 'Filter Row',
       },
       {
-        path: 'examples/sticky-columns',
+        path: 'examples/filters/filter-panel',
         loadComponent: () =>
-          import('./examples/table/sticky-columns/sticky-columns-example.component').then(
-            (m) => m.StickyColumnsExampleComponent,
+          import('./examples/filters/filter-panel/filter-panel-example.component').then(
+            (m) => m.FilterPanelExampleComponent,
           ),
-        title: 'Sticky Columns',
+        title: 'Filter Panel',
       },
       {
-        path: 'examples/selectable',
+        path: 'examples/filters/filter-category',
         loadComponent: () =>
-          import('./examples/table/selectable/selectable-example.component').then(
-            (m) => m.SelectableExampleComponent,
+          import('./examples/filters/filter-category/filter-category-example.component').then(
+            (m) => m.FilterCategoryExampleComponent,
           ),
-        title: 'Selectable Rows',
+        title: 'Filter Category',
       },
       {
-        path: 'examples/checkboxes',
+        path: 'examples/filters/filter-organism',
         loadComponent: () =>
-          import('./examples/table/checkboxes/checkboxes-example.component').then(
-            (m) => m.CheckboxesExampleComponent,
+          import('./examples/filters/filter-organism/filter-organism-example.component').then(
+            (m) => m.FilterOrganismExampleComponent,
           ),
-        title: 'Selection Checkboxes',
+        title: 'atom-filter',
       },
       {
-        path: 'examples/single-selection',
+        path: 'examples/filters/filter-initial-values',
         loadComponent: () =>
-          import('./examples/table/single-selection/single-selection-example.component').then(
-            (m) => m.SingleSelectionExampleComponent,
+          import('./examples/filters/filter-initial-values/filter-initial-values-example.component').then(
+            (m) => m.FilterInitialValuesExampleComponent,
           ),
-        title: 'Single Selection',
+        title: 'Filter Initial Values',
       },
       {
-        path: 'examples/empty-state',
+        path: 'examples/filters/filter-selection-changes',
         loadComponent: () =>
-          import('./examples/table/empty-state/empty-state-example.component').then(
-            (m) => m.EmptyStateExampleComponent,
+          import('./examples/filters/filter-selection-changes/filter-selection-changes-example.component').then(
+            (m) => m.FilterSelectionChangesExampleComponent,
           ),
-        title: 'Empty State',
+        title: 'Filter Selection Changes',
       },
       {
-        path: 'examples/cell-patterns',
+        path: 'examples/filters/filter-i18n',
         loadComponent: () =>
-          import('./examples/table/cell-patterns/cell-patterns-example.component').then(
-            (m) => m.CellPatternsExampleComponent,
+          import('./examples/filters/filter-i18n/filter-i18n-example.component').then(
+            (m) => m.FilterI18nExampleComponent,
           ),
-        title: 'Cell Patterns',
+        title: 'Filter i18n',
       },
     ],
   },
